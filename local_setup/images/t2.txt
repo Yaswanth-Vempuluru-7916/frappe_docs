@@ -1,0 +1,153 @@
+╭─    ~/Developer/frappe-custom                                                          ✔  10:54:22  ─╮
+╰─ cd frappe-bench                                                                                           ─╯
+
+╭─    ~/Developer/frappe-custom/frappe-bench                                             ✔  10:54:26  ─╮
+╰─ source venv/bin/activate                                                                                  ─╯
+
+╭─    ~/Developer/frappe-custom/frappe-bench                            ✔  frappe-bench   10:54:29  ─╮
+╰─ brew services start mariadb@10.6                                                                          ─╯
+
+Service `mariadb@10.6` already started, use `brew services restart mariadb@10.6` to restart.
+
+╭─    ~/Developer/frappe-custom/frappe-bench                            ✔  frappe-bench   10:54:35  ─╮
+╰─ brew services list                                                                                        ─╯
+
+Name          Status  User     File
+mariadb       none             
+mariadb@10.6  started yaswanth ~/Library/LaunchAgents/homebrew.mxcl.mariadb@10.6.plist
+postgresql@14 none             
+redis         started yaswanth ~/Library/LaunchAgents/homebrew.mxcl.redis.plist
+
+╭─    ~/Developer/frappe-custom/frappe-bench                            ✔  frappe-bench   10:54:43  ─╮
+╰─ mysql -u root                                                                                             ─╯
+
+ERROR 1698 (28000): Access denied for user 'root'@'localhost'
+
+╭─    ~/Developer/frappe-custom/frappe-bench                          1 ✘  frappe-bench   10:54:51  ─╮
+╰─ sudo /opt/homebrew/opt/mariadb@10.6/bin/mysql -u root                                                     ─╯
+
+Password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 4
+Server version: 10.6.24-MariaDB Homebrew
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> exit()
+    -> ^C
+^C^C
+exit
+exit
+    -> ^DBye
+
+╭─    ~/Developer/frappe-custom/frappe-bench                 ✔  1m 55s   frappe-bench   10:57:08  ─╮
+╰─ sudo /opt/homebrew/opt/mariadb@10.6/bin/mysql -u root                                                     ─╯
+
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 5
+Server version: 10.6.24-MariaDB Homebrew
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> ALTER USER 'root'@'localhost' IDENTIFIED BY 'root';
+Query OK, 0 rows affected (0.008 sec)
+
+MariaDB [(none)]> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.001 sec)
+
+MariaDB [(none)]> exit
+Bye
+
+╭─    ~/Developer/frappe-custom/frappe-bench                    ✔  19s   frappe-bench   10:57:54  ─╮
+╰─ mysql -u root -p                                                                                          ─╯
+
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 6
+Server version: 10.6.24-MariaDB Homebrew
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> exit
+Bye
+
+╭─    ~/Developer/frappe-custom/frappe-bench                    ✔  37s   frappe-bench   10:58:40  ─╮
+╰─ mysql -u root -p -e "SELECT VERSION();"                                                                   ─╯
+Enter password: 
++-----------------+
+| VERSION()       |
++-----------------+
+| 10.6.24-MariaDB |
++-----------------+
+
+╭─    ~/Developer/frappe-custom/frappe-bench                            ✔  frappe-bench   10:58:44  ─╮
+╰─ redis-cli ping                                                                                            ─╯
+PONG
+
+╭─    ~/Developer/frappe-custom/frappe-bench                            ✔  frappe-bench   10:58:52  ─╮
+╰─ python ../frappe/frappe/utils/bench_helper.py new-site mysite.local \                                     ─╯
+  --mariadb-root-password root \                    
+  --admin-password admin
+Traceback (most recent call last):
+  File "/Users/yaswanth/Developer/frappe-custom/frappe-bench/../frappe/frappe/utils/bench_helper.py", line 12, in <module>
+    import click
+ModuleNotFoundError: No module named 'click'
+
+╭─    ~/Developer/frappe-custom/frappe-bench                          1 ✘  frappe-bench   11:00:14  ─╮
+╰─ python ../frappe/frappe/frappe/utils/bench_helper.py new-site mysite.local \                              ─╯
+  --mariadb-root-password root \
+  --admin-password admin
+/opt/homebrew/Cellar/python@3.13/3.13.9_1/Frameworks/Python.framework/Versions/3.13/Resources/Python.app/Contents/MacOS/Python: can't open file '/Users/yaswanth/Developer/frappe-custom/frappe-bench/../frappe/frappe/frappe/utils/bench_helper.py': [Errno 2] No such file or directory
+
+╭─    ~/Developer/frappe-custom/frappe-bench                          2 ✘  frappe-bench   11:01:03  ─╮
+╰─ source venv/bin/activate                                                                                  ─╯
+
+╭─    ~/Developer/frappe-custom/frappe-bench                            ✔  frappe-bench   11:03:12  ─╮
+╰─ bench new-site mysite.local                                                                               ─╯
+zsh: command not found: bench
+
+╭─    ~/Developer/frappe-custom/frappe-bench                        127 ✘  frappe-bench   11:03:22  ─╮
+╰─ pip install frappe-bench                                                                                  ─╯
+Collecting frappe-bench
+  Using cached frappe_bench-5.27.0-py3-none-any.whl.metadata (16 kB)
+Requirement already satisfied: click~=8.2.0 in ./venv/lib/python3.13/site-packages (from frappe-bench) (8.2.1)
+Requirement already satisfied: gitpython~=3.1.30 in ./venv/lib/python3.13/site-packages (from frappe-bench) (3.1.45)
+Collecting honcho (from frappe-bench)
+  Using cached honcho-2.0.0-py3-none-any.whl.metadata (3.8 kB)
+Requirement already satisfied: jinja2~=3.1.3 in ./venv/lib/python3.13/site-packages (from frappe-bench) (3.1.6)
+Collecting python-crontab~=2.6.0 (from frappe-bench)
+  Using cached python_crontab-2.6.0-py3-none-any.whl.metadata (15 kB)
+Requirement already satisfied: requests~=2.32.5 in ./venv/lib/python3.13/site-packages (from frappe-bench) (2.32.5)
+Requirement already satisfied: semantic-version~=2.10.0 in ./venv/lib/python3.13/site-packages (from frappe-bench) (2.10.0)
+Collecting setuptools>=71.0.0 (from frappe-bench)
+  Using cached setuptools-80.9.0-py3-none-any.whl.metadata (6.6 kB)
+Collecting uv~=0.9.0 (from frappe-bench)
+  Using cached uv-0.9.9-py3-none-macosx_11_0_arm64.whl.metadata (11 kB)
+Requirement already satisfied: gitdb<5,>=4.0.1 in ./venv/lib/python3.13/site-packages (from gitpython~=3.1.30->frappe-bench) (4.0.12)
+Requirement already satisfied: smmap<6,>=3.0.1 in ./venv/lib/python3.13/site-packages (from gitdb<5,>=4.0.1->gitpython~=3.1.30->frappe-bench) (5.0.2)
+Requirement already satisfied: MarkupSafe>=2.0 in ./venv/lib/python3.13/site-packages (from jinja2~=3.1.3->frappe-bench) (3.0.3)
+Requirement already satisfied: python-dateutil in ./venv/lib/python3.13/site-packages (from python-crontab~=2.6.0->frappe-bench) (2.9.0.post0)
+Requirement already satisfied: charset_normalizer<4,>=2 in ./venv/lib/python3.13/site-packages (from requests~=2.32.5->frappe-bench) (3.4.4)
+Requirement already satisfied: idna<4,>=2.5 in ./venv/lib/python3.13/site-packages (from requests~=2.32.5->frappe-bench) (3.11)
+Requirement already satisfied: urllib3<3,>=1.21.1 in ./venv/lib/python3.13/site-packages (from requests~=2.32.5->frappe-bench) (2.5.0)
+Requirement already satisfied: certifi>=2017.4.17 in ./venv/lib/python3.13/site-packages (from requests~=2.32.5->frappe-bench) (2025.11.12)
+Requirement already satisfied: six>=1.5 in ./venv/lib/python3.13/site-packages (from python-dateutil->python-crontab~=2.6.0->frappe-bench) (1.17.0)
+Using cached frappe_bench-5.27.0-py3-none-any.whl (153 kB)
+Using cached python_crontab-2.6.0-py3-none-any.whl (25 kB)
+Using cached uv-0.9.9-py3-none-macosx_11_0_arm64.whl (18.1 MB)
+Using cached setuptools-80.9.0-py3-none-any.whl (1.2 MB)
+Using cached honcho-2.0.0-py3-none-any.whl (22 kB)
+Installing collected packages: honcho, uv, setuptools, python-crontab, frappe-bench
+Successfully installed frappe-bench-5.27.0 honcho-2.0.0 python-crontab-2.6.0 setuptools-80.9.0 uv-0.9.9
+
+╭─    ~/Developer/frappe-custom/frappe-bench                     ✔  4s   frappe-bench   11:04:16 
+╭─    ~/Developer/frappe-custom/frappe-bench                     ✔  4s   fr
+╭─    ~/Developer/frappe-custom/frappe-bench                     ✔  4s   frappe-bench   11:04:16  ─╮
+╭─    ~/Developer/frappe-custom/frappe-bench                                                                                                        ✔  4s   frappe-bench   11:04:16  ─╮
+╰─           
