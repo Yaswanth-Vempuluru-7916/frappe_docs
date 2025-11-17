@@ -1,0 +1,279 @@
+source /Users/yaswanth/Developer/frappe-custom/venv/bin/activate
+╭─    ~/Developer/frappe-custom                                                          ✔  11:04:24  ─╮
+╰─ source /Users/yaswanth/Developer/frappe-custom/venv/bin/activate                                          ─╯
+
+╭─    ~/Developer/frappe-custom                                        ✔  frappe-custom   11:04:25  ─╮
+╰─ cd frappe-bench                                                                                           ─╯
+
+╭─    ~/Developer/frappe-custom/frappe-bench                           ✔  frappe-custom   11:04:38  ─╮
+╰─ source venv/bin/activate                                                                                  ─╯
+
+╭─    ~/Developer/frappe-custom/frappe-bench                            ✔  frappe-bench   11:04:54  ─╮
+╰─ bench new-site mysite.local                                                                               ─╯
+WARN: Command not being executed in bench directory
+Usage: bench [OPTIONS] COMMAND [ARGS]...
+Try 'bench --help' for help.
+
+Error: No such command 'new-site'.
+
+╭─    ~/Developer/frappe-custom/frappe-bench                          2 ✘  frappe-bench   11:05:21  ─╮
+╰─ cd ..                                                                                                     ─╯
+
+╭─    ~/Developer/frappe-custom                                         ✔  frappe-bench   11:07:02  ─╮
+╰─ deactivate                                                                                                ─╯
+
+
+╭─    ~/Developer/frappe-custom                                                          ✔  11:07:44  ─╮
+╰─ rm -rf venv                                                                                               ─╯
+
+
+╭─    ~/Developer/frappe-custom                                                          ✔  11:07:51  ─╮
+╰─ cd frappe-bench                                                                                           ─╯
+
+╭─    ~/Developer/frappe-custom/frappe-bench                                             ✔  11:07:57  ─╮
+╰─ source venv/bin/activate                                                                                  ─╯
+
+╭─    ~/Developer/frappe-custom/frappe-bench                            ✔  frappe-bench   11:08:07  ─╮
+╰─ bench new-site mysite.local                                                                               ─╯
+WARN: Command not being executed in bench directory
+Usage: bench [OPTIONS] COMMAND [ARGS]...
+Try 'bench --help' for help.
+
+Error: No such command 'new-site'.
+
+╭─    ~/Developer/frappe-custom/frappe-bench                          2 ✘  frappe-bench   11:08:19  ─╮
+╰─ cd ~/Developer/frappe-custom/frappe-bench                                                                 ─╯
+source venv/bin/activate
+
+# Use frappe's CLI directly
+python -m frappe.utils.bench new-site mysite.local --mariadb-root-password root --admin-password admin
+/opt/homebrew/opt/python@3.13/bin/python3.13: Error while finding module specification for 'frappe.utils.bench' (ModuleNotFoundError: No module named 'frappe')
+
+╭─    ~/Developer/frappe-custom/frappe-bench                          1 ✘  frappe-bench   11:08:47  ─╮
+╰─ pip install -e ../frappe                                                                                  ─╯
+Obtaining file:///Users/yaswanth/Developer/frappe-custom/frappe
+  Installing build dependencies ... done
+  Checking if build backend supports build_editable ... done
+  Getting requirements to build editable ... done
+  Preparing editable metadata (pyproject.toml) ... done
+Requirement already satisfied: Babel~=2.16.0 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (2.16.0)
+Requirement already satisfied: Click~=8.2.0 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (8.2.1)
+Requirement already satisfied: filelock~=3.18.0 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (3.18.0)
+Requirement already satisfied: filetype~=1.2.0 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (1.2.0)
+Requirement already satisfied: GitPython~=3.1.44 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (3.1.45)
+Requirement already satisfied: Jinja2~=3.1.6 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (3.1.6)
+Requirement already satisfied: Pillow~=11.3.0 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (11.3.0)
+Requirement already satisfied: PyJWT~=2.10.1 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (2.10.1)
+Requirement already satisfied: PyMySQL==1.1.1 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (1.1.1)
+Requirement already satisfied: pypdf~=6.1.3 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (6.1.3)
+Collecting PyPika@ git+https://github.com/frappe/pypika@093984977ce157d35e048c51d9ff55a1f0f44570 (from frappe==16.0.0.dev0)
+  Using cached pypika-0.48.9-py2.py3-none-any.whl
+Requirement already satisfied: mysqlclient==2.2.7 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (2.2.7)
+Requirement already satisfied: PyQRCode~=1.2.1 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (1.2.1)
+Requirement already satisfied: PyYAML~=6.0.2 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (6.0.3)
+Requirement already satisfied: RestrictedPython~=8.0 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (8.1)
+Requirement already satisfied: WeasyPrint==66.0 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (66.0)
+Requirement already satisfied: pydyf==0.11.0 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (0.11.0)
+Requirement already satisfied: Werkzeug==3.1.3 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (3.1.3)
+Requirement already satisfied: Whoosh~=2.7.4 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (2.7.4)
+Requirement already satisfied: beautifulsoup4~=4.13.4 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (4.13.5)
+Requirement already satisfied: bleach-allowlist~=1.0.3 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (1.0.3)
+Requirement already satisfied: bleach~=6.2.0 in ./venv/lib/python3.13/site-packages (from bleach[css]~=6.2.0->frappe==16.0.0.dev0) (6.2.0)
+Requirement already satisfied: chardet~=5.2.0 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (5.2.0)
+Requirement already satisfied: croniter~=6.0.0 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (6.0.0)
+Requirement already satisfied: cryptography~=45.0.4 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (45.0.7)
+Requirement already satisfied: cssutils~=2.11.1 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (2.11.1)
+Requirement already satisfied: email-reply-parser~=0.5.12 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (0.5.12)
+Collecting gunicorn@ git+https://github.com/frappe/gunicorn@bb554053bb87218120d76ab6676af7015680e8b6 (from frappe==16.0.0.dev0)
+  Using cached gunicorn-23.0.0-py3-none-any.whl
+Requirement already satisfied: html5lib~=1.1 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (1.1)
+Requirement already satisfied: ipython~=8.37.0 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (8.37.0)
+Requirement already satisfied: ldap3~=2.9 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (2.9.1)
+Requirement already satisfied: markdown2~=2.5.3 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (2.5.4)
+Requirement already satisfied: MarkupSafe~=3.0.2 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (3.0.3)
+Requirement already satisfied: num2words~=0.5.14 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (0.5.14)
+Requirement already satisfied: oauthlib~=3.2.2 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (3.2.2)
+Requirement already satisfied: openpyxl~=3.1.5 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (3.1.5)
+Requirement already satisfied: orjson~=3.10.18 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (3.10.18)
+Requirement already satisfied: passlib~=1.7.4 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (1.7.4)
+Requirement already satisfied: pdfkit~=1.0.0 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (1.0.0)
+Requirement already satisfied: phonenumbers~=9.0.7 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (9.0.18)
+Requirement already satisfied: premailer~=3.10.0 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (3.10.0)
+Requirement already satisfied: psutil~=7.0.0 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (7.0.0)
+Requirement already satisfied: psycopg2-binary~=2.9.1 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (2.9.11)
+Requirement already satisfied: pyOpenSSL~=25.1.0 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (25.1.0)
+Requirement already satisfied: pydantic~=2.11.7 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (2.11.10)
+Requirement already satisfied: pyotp~=2.9.0 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (2.9.0)
+Requirement already satisfied: python-dateutil~=2.9.0 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (2.9.0.post0)
+Requirement already satisfied: pytz==2025.2 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (2025.2)
+Requirement already satisfied: rauth~=0.7.3 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (0.7.3)
+Requirement already satisfied: redis~=6.2.0 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (6.2.0)
+Requirement already satisfied: hiredis~=3.2.1 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (3.2.1)
+Requirement already satisfied: requests-oauthlib~=2.0.0 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (2.0.0)
+Requirement already satisfied: requests~=2.32.4 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (2.32.5)
+Requirement already satisfied: rq==2.4.0 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (2.4.0)
+Requirement already satisfied: rsa~=4.9 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (4.9.1)
+Requirement already satisfied: semantic-version~=2.10.0 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (2.10.0)
+Requirement already satisfied: sentry-sdk~=1.45.1 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (1.45.1)
+Requirement already satisfied: sqlparse~=0.5.0 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (0.5.3)
+Requirement already satisfied: sql_metadata~=2.17.0 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (2.17.0)
+Requirement already satisfied: tenacity~=9.1.2 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (9.1.2)
+Requirement already satisfied: terminaltables~=3.1.10 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (3.1.10)
+Requirement already satisfied: traceback-with-variables~=2.2.0 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (2.2.1)
+Requirement already satisfied: typing_extensions<5,>=4.6.1 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (4.15.0)
+Requirement already satisfied: tomli~=2.2.1 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (2.2.1)
+Requirement already satisfied: uuid-utils~=0.11.0 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (0.11.1)
+Requirement already satisfied: xlrd~=2.0.2 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (2.0.2)
+Requirement already satisfied: zxcvbn~=4.5.0 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (4.5.0)
+Requirement already satisfied: markdownify~=1.1.0 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (1.1.0)
+Requirement already satisfied: google-api-python-client~=2.172.0 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (2.172.0)
+Requirement already satisfied: google-auth-oauthlib~=1.2.2 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (1.2.3)
+Requirement already satisfied: google-auth~=2.40.3 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (2.40.3)
+Requirement already satisfied: posthog~=5.0.0 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (5.0.0)
+Requirement already satisfied: vobject~=0.9.9 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (0.9.9)
+Requirement already satisfied: pycountry~=24.6.1 in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (24.6.1)
+Requirement already satisfied: websockets in ./venv/lib/python3.13/site-packages (from frappe==16.0.0.dev0) (15.0.1)
+Requirement already satisfied: packaging in ./venv/lib/python3.13/site-packages (from gunicorn@ git+https://github.com/frappe/gunicorn@bb554053bb87218120d76ab6676af7015680e8b6->frappe==16.0.0.dev0) (25.0)
+Requirement already satisfied: cffi>=0.6 in ./venv/lib/python3.13/site-packages (from WeasyPrint==66.0->frappe==16.0.0.dev0) (2.0.0)
+Requirement already satisfied: tinyhtml5>=2.0.0b1 in ./venv/lib/python3.13/site-packages (from WeasyPrint==66.0->frappe==16.0.0.dev0) (2.0.0)
+Requirement already satisfied: tinycss2>=1.4.0 in ./venv/lib/python3.13/site-packages (from WeasyPrint==66.0->frappe==16.0.0.dev0) (1.4.0)
+Requirement already satisfied: cssselect2>=0.8.0 in ./venv/lib/python3.13/site-packages (from WeasyPrint==66.0->frappe==16.0.0.dev0) (0.8.0)
+Requirement already satisfied: Pyphen>=0.9.1 in ./venv/lib/python3.13/site-packages (from WeasyPrint==66.0->frappe==16.0.0.dev0) (0.17.2)
+Requirement already satisfied: fonttools>=4.0.0 in ./venv/lib/python3.13/site-packages (from fonttools[woff]>=4.0.0->WeasyPrint==66.0->frappe==16.0.0.dev0) (4.60.1)
+Requirement already satisfied: soupsieve>1.2 in ./venv/lib/python3.13/site-packages (from beautifulsoup4~=4.13.4->frappe==16.0.0.dev0) (2.8)
+Requirement already satisfied: webencodings in ./venv/lib/python3.13/site-packages (from bleach~=6.2.0->bleach[css]~=6.2.0->frappe==16.0.0.dev0) (0.5.1)
+Requirement already satisfied: more-itertools in ./venv/lib/python3.13/site-packages (from cssutils~=2.11.1->frappe==16.0.0.dev0) (10.8.0)
+Requirement already satisfied: gitdb<5,>=4.0.1 in ./venv/lib/python3.13/site-packages (from GitPython~=3.1.44->frappe==16.0.0.dev0) (4.0.12)
+Requirement already satisfied: smmap<6,>=3.0.1 in ./venv/lib/python3.13/site-packages (from gitdb<5,>=4.0.1->GitPython~=3.1.44->frappe==16.0.0.dev0) (5.0.2)
+Requirement already satisfied: httplib2<1.0.0,>=0.19.0 in ./venv/lib/python3.13/site-packages (from google-api-python-client~=2.172.0->frappe==16.0.0.dev0) (0.31.0)
+Requirement already satisfied: google-auth-httplib2<1.0.0,>=0.2.0 in ./venv/lib/python3.13/site-packages (from google-api-python-client~=2.172.0->frappe==16.0.0.dev0) (0.2.1)
+Requirement already satisfied: google-api-core!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0,<3.0.0,>=1.31.5 in ./venv/lib/python3.13/site-packages (from google-api-python-client~=2.172.0->frappe==16.0.0.dev0) (2.28.1)
+Requirement already satisfied: uritemplate<5,>=3.0.1 in ./venv/lib/python3.13/site-packages (from google-api-python-client~=2.172.0->frappe==16.0.0.dev0) (4.2.0)
+Requirement already satisfied: googleapis-common-protos<2.0.0,>=1.56.2 in ./venv/lib/python3.13/site-packages (from google-api-core!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0,<3.0.0,>=1.31.5->google-api-python-client~=2.172.0->frappe==16.0.0.dev0) (1.72.0)
+Requirement already satisfied: protobuf!=3.20.0,!=3.20.1,!=4.21.0,!=4.21.1,!=4.21.2,!=4.21.3,!=4.21.4,!=4.21.5,<7.0.0,>=3.19.5 in ./venv/lib/python3.13/site-packages (from google-api-core!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0,<3.0.0,>=1.31.5->google-api-python-client~=2.172.0->frappe==16.0.0.dev0) (6.33.1)
+Requirement already satisfied: proto-plus<2.0.0,>=1.22.3 in ./venv/lib/python3.13/site-packages (from google-api-core!=2.0.*,!=2.1.*,!=2.2.*,!=2.3.0,<3.0.0,>=1.31.5->google-api-python-client~=2.172.0->frappe==16.0.0.dev0) (1.26.1)
+Requirement already satisfied: cachetools<6.0,>=2.0.0 in ./venv/lib/python3.13/site-packages (from google-auth~=2.40.3->frappe==16.0.0.dev0) (5.5.2)
+Requirement already satisfied: pyasn1-modules>=0.2.1 in ./venv/lib/python3.13/site-packages (from google-auth~=2.40.3->frappe==16.0.0.dev0) (0.4.2)
+Requirement already satisfied: six>=1.9 in ./venv/lib/python3.13/site-packages (from html5lib~=1.1->frappe==16.0.0.dev0) (1.17.0)
+Requirement already satisfied: pyparsing<4,>=3.0.4 in ./venv/lib/python3.13/site-packages (from httplib2<1.0.0,>=0.19.0->google-api-python-client~=2.172.0->frappe==16.0.0.dev0) (3.2.5)
+Requirement already satisfied: decorator in ./venv/lib/python3.13/site-packages (from ipython~=8.37.0->frappe==16.0.0.dev0) (5.2.1)
+Requirement already satisfied: jedi>=0.16 in ./venv/lib/python3.13/site-packages (from ipython~=8.37.0->frappe==16.0.0.dev0) (0.19.2)
+Requirement already satisfied: matplotlib-inline in ./venv/lib/python3.13/site-packages (from ipython~=8.37.0->frappe==16.0.0.dev0) (0.2.1)
+Requirement already satisfied: pexpect>4.3 in ./venv/lib/python3.13/site-packages (from ipython~=8.37.0->frappe==16.0.0.dev0) (4.9.0)
+Requirement already satisfied: prompt_toolkit<3.1.0,>=3.0.41 in ./venv/lib/python3.13/site-packages (from ipython~=8.37.0->frappe==16.0.0.dev0) (3.0.52)
+Requirement already satisfied: pygments>=2.4.0 in ./venv/lib/python3.13/site-packages (from ipython~=8.37.0->frappe==16.0.0.dev0) (2.19.2)
+Requirement already satisfied: stack_data in ./venv/lib/python3.13/site-packages (from ipython~=8.37.0->frappe==16.0.0.dev0) (0.6.3)
+Requirement already satisfied: traitlets>=5.13.0 in ./venv/lib/python3.13/site-packages (from ipython~=8.37.0->frappe==16.0.0.dev0) (5.14.3)
+Requirement already satisfied: pyasn1>=0.4.6 in ./venv/lib/python3.13/site-packages (from ldap3~=2.9->frappe==16.0.0.dev0) (0.6.1)
+Requirement already satisfied: docopt>=0.6.2 in ./venv/lib/python3.13/site-packages (from num2words~=0.5.14->frappe==16.0.0.dev0) (0.6.2)
+Requirement already satisfied: et-xmlfile in ./venv/lib/python3.13/site-packages (from openpyxl~=3.1.5->frappe==16.0.0.dev0) (2.0.0)
+Requirement already satisfied: backoff>=1.10.0 in ./venv/lib/python3.13/site-packages (from posthog~=5.0.0->frappe==16.0.0.dev0) (2.2.1)
+Requirement already satisfied: distro>=1.5.0 in ./venv/lib/python3.13/site-packages (from posthog~=5.0.0->frappe==16.0.0.dev0) (1.9.0)
+Requirement already satisfied: lxml in ./venv/lib/python3.13/site-packages (from premailer~=3.10.0->frappe==16.0.0.dev0) (6.0.2)
+Requirement already satisfied: cssselect in ./venv/lib/python3.13/site-packages (from premailer~=3.10.0->frappe==16.0.0.dev0) (1.3.0)
+Requirement already satisfied: wcwidth in ./venv/lib/python3.13/site-packages (from prompt_toolkit<3.1.0,>=3.0.41->ipython~=8.37.0->frappe==16.0.0.dev0) (0.2.14)
+Requirement already satisfied: annotated-types>=0.6.0 in ./venv/lib/python3.13/site-packages (from pydantic~=2.11.7->frappe==16.0.0.dev0) (0.7.0)
+Requirement already satisfied: pydantic-core==2.33.2 in ./venv/lib/python3.13/site-packages (from pydantic~=2.11.7->frappe==16.0.0.dev0) (2.33.2)
+Requirement already satisfied: typing-inspection>=0.4.0 in ./venv/lib/python3.13/site-packages (from pydantic~=2.11.7->frappe==16.0.0.dev0) (0.4.2)
+Requirement already satisfied: charset_normalizer<4,>=2 in ./venv/lib/python3.13/site-packages (from requests~=2.32.4->frappe==16.0.0.dev0) (3.4.4)
+Requirement already satisfied: idna<4,>=2.5 in ./venv/lib/python3.13/site-packages (from requests~=2.32.4->frappe==16.0.0.dev0) (3.11)
+Requirement already satisfied: urllib3<3,>=1.21.1 in ./venv/lib/python3.13/site-packages (from requests~=2.32.4->frappe==16.0.0.dev0) (2.5.0)
+Requirement already satisfied: certifi>=2017.4.17 in ./venv/lib/python3.13/site-packages (from requests~=2.32.4->frappe==16.0.0.dev0) (2025.11.12)
+Requirement already satisfied: pycparser in ./venv/lib/python3.13/site-packages (from cffi>=0.6->WeasyPrint==66.0->frappe==16.0.0.dev0) (2.23)
+Requirement already satisfied: brotli>=1.0.1 in ./venv/lib/python3.13/site-packages (from fonttools[woff]>=4.0.0->WeasyPrint==66.0->frappe==16.0.0.dev0) (1.2.0)
+Requirement already satisfied: zopfli>=0.1.4 in ./venv/lib/python3.13/site-packages (from fonttools[woff]>=4.0.0->WeasyPrint==66.0->frappe==16.0.0.dev0) (0.4.0)
+Requirement already satisfied: parso<0.9.0,>=0.8.4 in ./venv/lib/python3.13/site-packages (from jedi>=0.16->ipython~=8.37.0->frappe==16.0.0.dev0) (0.8.5)
+Requirement already satisfied: ptyprocess>=0.5 in ./venv/lib/python3.13/site-packages (from pexpect>4.3->ipython~=8.37.0->frappe==16.0.0.dev0) (0.7.0)
+Requirement already satisfied: executing>=1.2.0 in ./venv/lib/python3.13/site-packages (from stack_data->ipython~=8.37.0->frappe==16.0.0.dev0) (2.2.1)
+Requirement already satisfied: asttokens>=2.1.0 in ./venv/lib/python3.13/site-packages (from stack_data->ipython~=8.37.0->frappe==16.0.0.dev0) (3.0.1)
+Requirement already satisfied: pure-eval in ./venv/lib/python3.13/site-packages (from stack_data->ipython~=8.37.0->frappe==16.0.0.dev0) (0.2.3)
+Building wheels for collected packages: frappe
+  Building editable for frappe (pyproject.toml) ... done
+  Created wheel for frappe: filename=frappe-16.0.0.dev0-py3-none-any.whl size=5858 sha256=96fffe40b8fee04ede719aa578f03c7b1d092952bb461e48ebd19a9ac7e28ffa
+  Stored in directory: /private/var/folders/8m/09nv68_55q337vkn_tnybft00000gn/T/pip-ephem-wheel-cache-c4q99aze/wheels/ba/18/45/72d12f4bb93c243a781161e7cb7ab1c9cafd11064542f1cef0
+Successfully built frappe
+Installing collected packages: frappe
+  Attempting uninstall: frappe
+    Found existing installation: frappe 16.0.0.dev0
+    Uninstalling frappe-16.0.0.dev0:
+      Successfully uninstalled frappe-16.0.0.dev0
+Successfully installed frappe-16.0.0.dev0
+
+╭─    ~/Developer/frappe-custom/frappe-bench                            ✔  frappe-bench   11:09:32  ─╮
+╰─ pip install -e ../erpnext                                                                                 ─╯
+Obtaining file:///Users/yaswanth/Developer/frappe-custom/erpnext
+  Installing build dependencies ... done
+  Checking if build backend supports build_editable ... done
+  Getting requirements to build editable ... done
+  Preparing editable metadata (pyproject.toml) ... done
+Requirement already satisfied: Unidecode~=1.4.0 in ./venv/lib/python3.13/site-packages (from erpnext==16.0.0.dev0) (1.4.0)
+Requirement already satisfied: barcodenumber~=0.5.0 in ./venv/lib/python3.13/site-packages (from erpnext==16.0.0.dev0) (0.5.0)
+Requirement already satisfied: rapidfuzz~=3.12.2 in ./venv/lib/python3.13/site-packages (from erpnext==16.0.0.dev0) (3.12.2)
+Requirement already satisfied: holidays~=0.75 in ./venv/lib/python3.13/site-packages (from erpnext==16.0.0.dev0) (0.84)
+Requirement already satisfied: googlemaps~=4.10.0 in ./venv/lib/python3.13/site-packages (from erpnext==16.0.0.dev0) (4.10.0)
+Requirement already satisfied: plaid-python~=7.2.1 in ./venv/lib/python3.13/site-packages (from erpnext==16.0.0.dev0) (7.2.1)
+Requirement already satisfied: python-youtube~=0.9.7 in ./venv/lib/python3.13/site-packages (from erpnext==16.0.0.dev0) (0.9.8)
+Requirement already satisfied: pypng~=0.20220715.0 in ./venv/lib/python3.13/site-packages (from erpnext==16.0.0.dev0) (0.20220715.0)
+Requirement already satisfied: mt-940>=4.26.0 in ./venv/lib/python3.13/site-packages (from erpnext==16.0.0.dev0) (4.30.0)
+Requirement already satisfied: pandas~=2.2.2 in ./venv/lib/python3.13/site-packages (from erpnext==16.0.0.dev0) (2.2.3)
+Requirement already satisfied: statsmodels~=0.14.5 in ./venv/lib/python3.13/site-packages (from erpnext==16.0.0.dev0) (0.14.5)
+Requirement already satisfied: python-stdnum in ./venv/lib/python3.13/site-packages (from barcodenumber~=0.5.0->erpnext==16.0.0.dev0) (2.1)
+Requirement already satisfied: requests<3.0,>=2.20.0 in ./venv/lib/python3.13/site-packages (from googlemaps~=4.10.0->erpnext==16.0.0.dev0) (2.32.5)
+Requirement already satisfied: python-dateutil in ./venv/lib/python3.13/site-packages (from holidays~=0.75->erpnext==16.0.0.dev0) (2.9.0.post0)
+Requirement already satisfied: numpy>=1.26.0 in ./venv/lib/python3.13/site-packages (from pandas~=2.2.2->erpnext==16.0.0.dev0) (2.3.5)
+Requirement already satisfied: pytz>=2020.1 in ./venv/lib/python3.13/site-packages (from pandas~=2.2.2->erpnext==16.0.0.dev0) (2025.2)
+Requirement already satisfied: tzdata>=2022.7 in ./venv/lib/python3.13/site-packages (from pandas~=2.2.2->erpnext==16.0.0.dev0) (2025.2)
+Requirement already satisfied: dataclasses-json<0.7.0,>=0.6.0 in ./venv/lib/python3.13/site-packages (from python-youtube~=0.9.7->erpnext==16.0.0.dev0) (0.6.7)
+Requirement already satisfied: isodate<=0.7.2,>=0.6.0 in ./venv/lib/python3.13/site-packages (from python-youtube~=0.9.7->erpnext==16.0.0.dev0) (0.7.2)
+Requirement already satisfied: requests-oauthlib<3.0.0,>=1.3.0 in ./venv/lib/python3.13/site-packages (from python-youtube~=0.9.7->erpnext==16.0.0.dev0) (2.0.0)
+Requirement already satisfied: marshmallow<4.0.0,>=3.18.0 in ./venv/lib/python3.13/site-packages (from dataclasses-json<0.7.0,>=0.6.0->python-youtube~=0.9.7->erpnext==16.0.0.dev0) (3.26.1)
+Requirement already satisfied: typing-inspect<1,>=0.4.0 in ./venv/lib/python3.13/site-packages (from dataclasses-json<0.7.0,>=0.6.0->python-youtube~=0.9.7->erpnext==16.0.0.dev0) (0.9.0)
+Requirement already satisfied: packaging>=17.0 in ./venv/lib/python3.13/site-packages (from marshmallow<4.0.0,>=3.18.0->dataclasses-json<0.7.0,>=0.6.0->python-youtube~=0.9.7->erpnext==16.0.0.dev0) (25.0)
+Requirement already satisfied: charset_normalizer<4,>=2 in ./venv/lib/python3.13/site-packages (from requests<3.0,>=2.20.0->googlemaps~=4.10.0->erpnext==16.0.0.dev0) (3.4.4)
+Requirement already satisfied: idna<4,>=2.5 in ./venv/lib/python3.13/site-packages (from requests<3.0,>=2.20.0->googlemaps~=4.10.0->erpnext==16.0.0.dev0) (3.11)
+Requirement already satisfied: urllib3<3,>=1.21.1 in ./venv/lib/python3.13/site-packages (from requests<3.0,>=2.20.0->googlemaps~=4.10.0->erpnext==16.0.0.dev0) (2.5.0)
+Requirement already satisfied: certifi>=2017.4.17 in ./venv/lib/python3.13/site-packages (from requests<3.0,>=2.20.0->googlemaps~=4.10.0->erpnext==16.0.0.dev0) (2025.11.12)
+Requirement already satisfied: oauthlib>=3.0.0 in ./venv/lib/python3.13/site-packages (from requests-oauthlib<3.0.0,>=1.3.0->python-youtube~=0.9.7->erpnext==16.0.0.dev0) (3.2.2)
+Requirement already satisfied: scipy!=1.9.2,>=1.8 in ./venv/lib/python3.13/site-packages (from statsmodels~=0.14.5->erpnext==16.0.0.dev0) (1.16.3)
+Requirement already satisfied: patsy>=0.5.6 in ./venv/lib/python3.13/site-packages (from statsmodels~=0.14.5->erpnext==16.0.0.dev0) (1.0.2)
+Requirement already satisfied: mypy-extensions>=0.3.0 in ./venv/lib/python3.13/site-packages (from typing-inspect<1,>=0.4.0->dataclasses-json<0.7.0,>=0.6.0->python-youtube~=0.9.7->erpnext==16.0.0.dev0) (1.1.0)
+Requirement already satisfied: typing-extensions>=3.7.4 in ./venv/lib/python3.13/site-packages (from typing-inspect<1,>=0.4.0->dataclasses-json<0.7.0,>=0.6.0->python-youtube~=0.9.7->erpnext==16.0.0.dev0) (4.15.0)
+Requirement already satisfied: six>=1.5 in ./venv/lib/python3.13/site-packages (from python-dateutil->holidays~=0.75->erpnext==16.0.0.dev0) (1.17.0)
+Building wheels for collected packages: erpnext
+  Building editable for erpnext (pyproject.toml) ... done
+  Created wheel for erpnext: filename=erpnext-16.0.0.dev0-py3-none-any.whl size=4084 sha256=41a531c0a7981c9e2c8d308415c4886feb900987717d6bc4e004bef46ffee290
+  Stored in directory: /private/var/folders/8m/09nv68_55q337vkn_tnybft00000gn/T/pip-ephem-wheel-cache-6adzi3g1/wheels/54/ff/29/63ce98fc2f619344d5e8686e09d94ad0cc7246b285812ba7c4
+Successfully built erpnext
+Installing collected packages: erpnext
+  Attempting uninstall: erpnext
+    Found existing installation: erpnext 16.0.0.dev0
+    Uninstalling erpnext-16.0.0.dev0:
+      Successfully uninstalled erpnext-16.0.0.dev0
+Successfully installed erpnext-16.0.0.dev0
+
+╭─    ~/Developer/frappe-custom/frappe-bench                            ✔  frappe-bench   11:09:44  ─╮
+╰─ pip install -e ../hrms                                                                                    ─╯
+Obtaining file:///Users/yaswanth/Developer/frappe-custom/hrms
+  Installing build dependencies ... done
+  Checking if build backend supports build_editable ... done
+  Getting requirements to build editable ... done
+  Preparing editable metadata (pyproject.toml) ... done
+Building wheels for collected packages: hrms
+  Building editable for hrms (pyproject.toml) ... done
+  Created wheel for hrms: filename=hrms-16.0.0.dev0-py3-none-any.whl size=3779 sha256=6235b8ac66c273e0e84dc94fe10d978e4c3e53486661c556e8381fef8d77a27a
+  Stored in directory: /private/var/folders/8m/09nv68_55q337vkn_tnybft00000gn/T/pip-ephem-wheel-cache-pxxrka82/wheels/a0/48/cb/d035a2d9a6428c2524e3c74a9d476922eebe01e2221c1a1097
+Successfully built hrms
+Installing collected packages: hrms
+  Attempting uninstall: hrms
+    Found existing installation: hrms 16.0.0.dev0
+    Uninstalling hrms-16.0.0.dev0:
+      Successfully uninstalled hrms-16.0.0.dev0
+Successfully installed hrms-16.0.0.dev0
+
+╭─    ~/Developer/frappe-custom/frappe-bench                            ✔  frappe-bench   11:09:49  ─╮
+╰─ python -m frappe.utils.bench new-site mysite.local --mariadb-root-password root --admin-password admin    ─╯
+/opt/homebrew/opt/python@3.13/bin/python3.13: Error while finding module specification for 'frappe.utils.bench' (ModuleNotFoundError: No module named 'frappe')
+
+╭─    ~/Developer/frappe-custom/frappe-bench                          1 ✘  fr
+╭─    ~/Developer/frappe-custom/frappe-bench                                                                                                             1 ✘  frappe-bench   11:09:58  ─╮
+╰─      
