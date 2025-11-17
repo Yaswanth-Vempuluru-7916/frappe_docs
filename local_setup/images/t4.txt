@@ -1,0 +1,410 @@
+source /Users/yaswanth/Developer/frappe-custom/venv/bin/activate
+╭─    ~/Developer/frappe-custom                                                          ✔  11:44:56  ─╮
+╰─ source /Users/yaswanth/Developer/frappe-custom/venv/bin/activate                                          ─╯
+
+╭─    ~/Developer/frappe-custom                                        ✔  frappe-custom   11:44:56  ─╮
+╰─ sudo nano /etc/hosts                                                                                      ─╯
+
+Password:
+
+╭─    ~/Developer/frappe-custom                                ✔  31s   frappe-custom   11:45:30  ─╮
+╰─ cat /etc/hosts                                                                                            ─╯
+##
+# Host Database
+#
+# localhost is used to configure the loopback interface
+# when the system is booting.  Do not change this entry.
+##
+127.0.0.1       localhost
+127.0.0.1 mysite.local
+255.255.255.255 broadcasthost
+::1             localhost
+
+╭─    ~/Developer/frappe-custom                                        ✔  frappe-custom   11:45:45  ─╮
+╰─ bench start                                                                                               ─╯
+WARN: Command not being executed in bench directory
+2025-11-17 11:45:54 [22653] [ERROR] Procfile does not exist or is not a file
+
+╭─    ~/Developer/frappe-custom                                      1 ✘  frappe-custom   11:45:54  ─╮
+╰─ cd frappe-bench                                                                                           ─╯
+
+╭─    ~/Developer/frappe-custom/frappe-bench                           ✔  frappe-custom   11:46:00  ─╮
+╰─ bench start                                                                                               ─╯
+11:46:04 system        | web.1 started (pid=22682)
+11:46:04 system        | redis_queue.1 started (pid=22683)
+11:46:04 system        | redis_cache.1 started (pid=22684)
+11:46:04 system        | worker.1 started (pid=22686)
+11:46:04 system        | watch.1 started (pid=22685)
+11:46:04 system        | socketio.1 started (pid=22687)
+11:46:04 system        | schedule.1 started (pid=22688)
+11:46:04 redis_queue.1 | 22683:C 17 Nov 2025 11:46:04.836 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+11:46:04 redis_queue.1 | 22683:C 17 Nov 2025 11:46:04.836 * Redis version=8.2.3, bits=64, commit=00000000, modified=1, pid=22683, just started
+11:46:04 redis_queue.1 | 22683:C 17 Nov 2025 11:46:04.836 * Configuration loaded
+11:46:04 redis_queue.1 | 22683:M 17 Nov 2025 11:46:04.837 * monotonic clock: POSIX clock_gettime
+11:46:04 redis_queue.1 | 22683:M 17 Nov 2025 11:46:04.837 * Running mode=standalone, port=11000.
+11:46:04 redis_queue.1 | 22683:M 17 Nov 2025 11:46:04.837 # WARNING: The TCP backlog setting of 511 cannot be enforced because kern.ipc.somaxconn is set to the lower value of 128.
+11:46:04 redis_cache.1 | 22684:C 17 Nov 2025 11:46:04.837 * oO0OoO0OoO0Oo Redis is starting oO0OoO0OoO0Oo
+11:46:04 redis_cache.1 | 22684:C 17 Nov 2025 11:46:04.837 * Redis version=8.2.3, bits=64, commit=00000000, modified=1, pid=22684, just started
+11:46:04 redis_cache.1 | 22684:C 17 Nov 2025 11:46:04.837 * Configuration loaded
+11:46:04 redis_cache.1 | 22684:M 17 Nov 2025 11:46:04.838 * monotonic clock: POSIX clock_gettime
+11:46:04 redis_queue.1 | 22683:M 17 Nov 2025 11:46:04.838 * Server initialized
+11:46:04 redis_cache.1 | 22684:M 17 Nov 2025 11:46:04.838 * Running mode=standalone, port=13000.
+11:46:04 redis_queue.1 | 22683:M 17 Nov 2025 11:46:04.838 * Loading RDB produced by version 8.2.3
+11:46:04 redis_cache.1 | 22684:M 17 Nov 2025 11:46:04.838 # WARNING: The TCP backlog setting of 511 cannot be enforced because kern.ipc.somaxconn is set to the lower value of 128.
+11:46:04 redis_queue.1 | 22683:M 17 Nov 2025 11:46:04.838 * RDB age 277 seconds
+11:46:04 redis_queue.1 | 22683:M 17 Nov 2025 11:46:04.838 * RDB memory usage when created 0.77 Mb
+11:46:04 redis_queue.1 | 22683:M 17 Nov 2025 11:46:04.838 * Done loading RDB, keys loaded: 0, keys expired: 0.
+11:46:04 redis_queue.1 | 22683:M 17 Nov 2025 11:46:04.838 * DB loaded from disk: 0.000 seconds
+11:46:04 redis_queue.1 | 22683:M 17 Nov 2025 11:46:04.838 * Ready to accept connections tcp
+11:46:04 redis_cache.1 | 22684:M 17 Nov 2025 11:46:04.838 * Server initialized
+11:46:04 redis_cache.1 | 22684:M 17 Nov 2025 11:46:04.838 * Ready to accept connections tcp
+11:46:04 socketio.1    | Realtime service listening on: ws://0.0.0.0:9000
+11:46:05 watch.1       | 
+11:46:05 watch.1       | yarn run v1.22.22
+11:46:05 watch.1       | (node:22700) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+11:46:05 watch.1       | (Use `node --trace-deprecation ...` to show where the warning was created)
+11:46:05 watch.1       | $ node esbuild --watch --live-reload
+11:46:05 web.1         | WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+11:46:05 web.1         |  * Running on all addresses (0.0.0.0)
+11:46:05 web.1         |  * Running on http://127.0.0.1:8000
+11:46:05 web.1         |  * Running on http://192.168.137.196:8000
+11:46:05 web.1         | Press CTRL+C to quit
+11:46:05 web.1         |  * Restarting with stat
+11:46:05 web.1         |  * Debugger is active!
+11:46:05 web.1         |  * Debugger PIN: 484-784-809
+11:46:06 watch.1       | Browserslist: caniuse-lite is outdated. Please run:
+11:46:06 watch.1       |   npx update-browserslist-db@latest
+11:46:06 watch.1       |   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+11:46:10 watch.1       | Watching for changes...
+11:46:24 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:24] "GET / HTTP/1.1" 200 -
+11:46:24 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:24] "GET /assets/frappe/dist/css/login.bundle.PBMCKY2Y.css HTTP/1.1" 200 -
+11:46:24 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:24] "GET /assets/frappe/dist/css/website.bundle.67AIVY2Z.css HTTP/1.1" 200 -
+11:46:24 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:24] "GET /assets/frappe/icons/timeless/icons.svg?v=1763360170.054721 HTTP/1.1" 200 -
+11:46:24 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:24] "GET /assets/frappe/dist/js/frappe-web.bundle.VCMYVOZ5.js HTTP/1.1" 200 -
+11:46:24 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:24] "GET /assets/erpnext/dist/css/erpnext-web.bundle.7WCAA7GY.css HTTP/1.1" 200 -
+11:46:24 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:24] "GET /assets/frappe/icons/espresso/icons.svg?v=1763360170.054721 HTTP/1.1" 200 -
+11:46:24 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:24] "GET /assets/erpnext/icons/pos-icons.svg?v=1763360170.054721 HTTP/1.1" 200 -
+11:46:24 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:24] "GET /assets/frappe/images/frappe-framework-logo.svg HTTP/1.1" 200 -
+11:46:24 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:24] "GET /website_script.js HTTP/1.1" 200 -
+11:46:24 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:24] "GET /assets/frappe/css/fonts/inter/InterVariable.woff2 HTTP/1.1" 200 -
+11:46:24 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:24] "GET /assets/frappe/dist/js/file_uploader.bundle.XGOBNNJT.js HTTP/1.1" 200 -
+11:46:24 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:24] "GET /assets/erpnext/images/erpnext-favicon.svg HTTP/1.1" 200 -
+11:46:32 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:32] "POST /login HTTP/1.1" 200 -
+11:46:32 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:32] "GET /assets/erpnext/images/erpnext-logo.svg HTTP/1.1" 200 -
+11:46:32 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:32] "GET /app HTTP/1.1" 200 -
+11:46:32 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:32] "GET /assets/frappe/dist/css/desk.bundle.YSJO24YG.css HTTP/1.1" 200 -
+11:46:32 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:32] "GET /assets/erpnext/dist/css/erpnext.bundle.FHOTIJIE.css HTTP/1.1" 200 -
+11:46:32 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:32] "GET /assets/frappe/dist/css/report.bundle.DLKG6RT7.css HTTP/1.1" 200 -
+11:46:32 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:32] "GET /assets/frappe/dist/js/list.bundle.KYKUURZC.js HTTP/1.1" 200 -
+11:46:32 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:32] "GET /assets/hrms/dist/css/hrms.bundle.7UCYRMET.css HTTP/1.1" 200 -
+11:46:32 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:32] "GET /assets/frappe/dist/js/desk.bundle.4K6I5JVH.js HTTP/1.1" 200 -
+11:46:32 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:32] "GET /assets/frappe/dist/js/libs.bundle.LLRFRX7M.js HTTP/1.1" 200 -
+11:46:32 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:32] "GET /assets/frappe/dist/js/form.bundle.AVPIFT75.js HTTP/1.1" 200 -
+11:46:32 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:32] "GET /assets/frappe/dist/js/controls.bundle.UBISUQJI.js HTTP/1.1" 200 -
+11:46:32 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:32] "GET /assets/frappe/dist/js/report.bundle.BHPTKPTS.js HTTP/1.1" 200 -
+11:46:32 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:32] "GET /assets/frappe/dist/js/telemetry.bundle.ZJBT5ETW.js HTTP/1.1" 200 -
+11:46:32 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:32] "GET /assets/frappe/dist/js/billing.bundle.CPRCUCBA.js HTTP/1.1" 200 -
+11:46:32 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:32] "GET /assets/erpnext/dist/js/erpnext.bundle.QEBQVODX.js HTTP/1.1" 200 -
+11:46:32 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:32] "GET /assets/hrms/dist/js/hrms.bundle.HOCVKNCN.js HTTP/1.1" 200 -
+11:46:32 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:32] "GET /assets/frappe/sounds/submit.mp3 HTTP/1.1" 200 -
+11:46:32 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:32] "GET /assets/frappe/sounds/email.mp3 HTTP/1.1" 200 -
+11:46:32 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:32] "GET /assets/frappe/sounds/cancel.mp3 HTTP/1.1" 200 -
+11:46:32 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:32] "GET /assets/frappe/sounds/delete.mp3 HTTP/1.1" 200 -
+11:46:32 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:32] "GET /assets/frappe/sounds/click.mp3 HTTP/1.1" 200 -
+11:46:32 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:32] "GET /assets/frappe/sounds/error.mp3 HTTP/1.1" 200 -
+11:46:32 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:32] "GET /assets/frappe/sounds/alert.mp3 HTTP/1.1" 200 -
+11:46:32 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:32] "GET /assets/erpnext/sounds/incoming-call.mp3 HTTP/1.1" 200 -
+11:46:32 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:32] "GET /assets/erpnext/sounds/call-disconnect.mp3 HTTP/1.1" 200 -
+11:46:32 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:32] "GET /assets/erpnext/sounds/numpad-touch.mp3 HTTP/1.1" 200 -
+11:46:32 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:32] "GET /assets/erpnext/js/setup_wizard.js?v=1763360192670 HTTP/1.1" 200 -
+11:46:32 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:32] "POST /api/method/frappe.desk.page.setup_wizard.setup_wizard.load_languages HTTP/1.1" 200 -
+11:46:32 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:32] "GET /api/method/frappe.client.get_value?doctype=System%20Settings&fieldname=["country","timezone","currency","language"]&filters=System%20Settings&_=1763360192623 HTTP/1.1" 200 -
+11:46:32 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:32] "GET /api/method/frappe.client.get_value?doctype=User&fieldname=["full_name","email"]&filters={"name":["not%20in",["Administrator","Guest"]]}&_=1763360192624 HTTP/1.1" 200 -
+11:46:32 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:32] "POST /api/method/frappe.geo.country_info.get_country_timezone_info HTTP/1.1" 200 -
+11:46:32 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:32] "GET /api/method/frappe.desk.form.load.getdoc?doctype=Currency&name=INR&_=1763360192625 HTTP/1.1" 200 -
+11:46:36 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:36] "POST /api/method/frappe.desk.page.setup_wizard.setup_wizard.load_user_details HTTP/1.1" 200 -
+11:46:47 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:47] "GET /api/method/frappe.realtime.get_user_info HTTP/1.1" 200 -
+11:46:58 web.1         | 127.0.0.1 - - [17/Nov/2025 11:46:58] "POST /api/method/frappe.core.doctype.user.user.test_password_strength HTTP/1.1" 200 -
+11:47:00 web.1         | 127.0.0.1 - - [17/Nov/2025 11:47:00] "POST /api/method/frappe.core.doctype.user.user.test_password_strength HTTP/1.1" 200 -
+11:47:02 web.1         | 127.0.0.1 - - [17/Nov/2025 11:47:02] "POST /api/method/erpnext.accounts.doctype.account.chart_of_accounts.chart_of_accounts.get_charts_for_country HTTP/1.1" 200 -
+11:47:12 web.1         | /Users/yaswanth/Developer/frappe-custom/frappe-bench/apps/frappe/frappe/database/mariadb/mysqlclient.py:499: UserWarning: Commit/rollback are disabled during certain events. This command will
+11:47:12 web.1         | be ignored. Commit/Rollback from here WILL CAUSE very hard to debug problems with atomicity and
+11:47:12 web.1         | concurrent data update bugs.
+11:47:12 web.1         |   self.commit()
+11:47:17 web.1         | Updating Dashboard for frappe
+11:47:17 web.1         | Updating Dashboard for erpnext
+11:47:17 web.1         | Updating Dashboard for hrms
+11:47:17 web.1         | 127.0.0.1 - - [17/Nov/2025 11:47:17] "POST /api/method/frappe.desk.page.setup_wizard.setup_wizard.setup_complete HTTP/1.1" 200 -
+11:47:20 web.1         | 127.0.0.1 - - [17/Nov/2025 11:47:20] "GET /app HTTP/1.1" 200 -
+11:47:20 web.1         | 127.0.0.1 - - [17/Nov/2025 11:47:20] "GET /api/method/frappe.desk.doctype.event.event.get_events?start=2025-11-17&end=2025-11-17&_=1763360240315 HTTP/1.1" 200 -
+11:47:20 web.1         | 127.0.0.1 - - [17/Nov/2025 11:47:20] "GET /assets/frappe/images/ui-states/notification-empty-state.svg HTTP/1.1" 200 -
+11:47:20 web.1         | 127.0.0.1 - - [17/Nov/2025 11:47:20] "GET /assets/frappe/images/web.svg HTTP/1.1" 200 -
+11:47:20 web.1         | 127.0.0.1 - - [17/Nov/2025 11:47:20] "GET /assets/hrms/images/frappe-hr-logo.svg HTTP/1.1" 200 -
+11:47:20 web.1         | 127.0.0.1 - - [17/Nov/2025 11:47:20] "GET /assets/frappe/images/settings-gear.svg HTTP/1.1" 200 -
+11:47:20 web.1         | 127.0.0.1 - - [17/Nov/2025 11:47:20] "GET /api/method/frappe.desk.doctype.notification_log.notification_log.get_notification_logs?limit=20&_=1763360240314 HTTP/1.1" 200 -
+11:47:20 web.1         | 127.0.0.1 - - [17/Nov/2025 11:47:20] "GET /assets/frappe/images/ui-states/event-empty-state.svg HTTP/1.1" 200 -
+11:47:20 web.1         | 127.0.0.1 - - [17/Nov/2025 11:47:20] "GET /api/method/frappe.desk.desktop.get_desktop_page?page={"name":"Home","title":"Home","public":1}&_=1763360240316 HTTP/1.1" 200 -
+11:47:20 web.1         | 127.0.0.1 - - [17/Nov/2025 11:47:20] "POST /api/method/frappe.desk.reportview.get_count HTTP/1.1" 200 -
+11:47:20 web.1         | 127.0.0.1 - - [17/Nov/2025 11:47:20] "POST /api/method/frappe.desk.reportview.get_count HTTP/1.1" 200 -
+11:47:20 web.1         | 127.0.0.1 - - [17/Nov/2025 11:47:20] "POST /api/method/frappe.desk.reportview.get_count HTTP/1.1" 200 -
+11:47:20 web.1         | 127.0.0.1 - - [17/Nov/2025 11:47:20] "POST /api/method/frappe.desk.reportview.get_count HTTP/1.1" 200 -
+11:47:25 web.1         | 127.0.0.1 - - [17/Nov/2025 11:47:25] "GET /api/method/frappe.realtime.get_user_info HTTP/1.1" 200 -
+11:47:37 web.1         | 127.0.0.1 - - [17/Nov/2025 11:47:37] "GET /api/method/frappe.desk.desktop.get_desktop_page?page={"name":"Overview","title":"Overview","public":1}&_=1763360240317 HTTP/1.1" 200 -
+11:47:37 web.1         | 127.0.0.1 - - [17/Nov/2025 11:47:37] "POST /api/method/frappe.desk.reportview.get_count HTTP/1.1" 200 -
+11:47:37 web.1         | 127.0.0.1 - - [17/Nov/2025 11:47:37] "POST /api/method/frappe.desk.doctype.route_history.route_history.deferred_insert HTTP/1.1" 200 -
+12:06:49 web.1         | 127.0.0.1 - - [17/Nov/2025 12:06:49] "GET /api/method/frappe.realtime.get_user_info HTTP/1.1" 200 -
+12:22:05 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:05] "POST /api/method/logout HTTP/1.1" 200 -
+12:22:05 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:05] "POST /api/method/logout HTTP/1.1" 200 -
+12:22:05 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:05] "GET /login?redirect-to=/app/overview HTTP/1.1" 200 -
+12:22:05 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:05] "GET /assets/frappe/dist/css/website.bundle.VQOJJCZA.css HTTP/1.1" 200 -
+12:22:05 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:05] "GET /assets/erpnext/dist/css/erpnext-web.bundle.ERGM65CS.css HTTP/1.1" 200 -
+12:22:05 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:05] "GET /assets/frappe/dist/css/login.bundle.PTUOUV5M.css HTTP/1.1" 200 -
+12:22:05 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:05] "GET /assets/frappe/icons/timeless/icons.svg?v=1763362259.8067174 HTTP/1.1" 200 -
+12:22:05 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:05] "GET /assets/frappe/icons/espresso/icons.svg?v=1763362259.8067174 HTTP/1.1" 200 -
+12:22:05 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:05] "GET /assets/erpnext/icons/pos-icons.svg?v=1763362259.8067174 HTTP/1.1" 200 -
+12:22:05 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:05] "GET /website_script.js HTTP/1.1" 200 -
+12:22:18 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:18] "POST /login HTTP/1.1" 200 -
+12:22:19 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:19] "GET /app/overview HTTP/1.1" 200 -
+12:22:19 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:19] "GET /assets/frappe/dist/css/report.bundle.RX65GEYH.css HTTP/1.1" 200 -
+12:22:19 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:19] "GET /assets/erpnext/dist/css/erpnext.bundle.4CNBWDCD.css HTTP/1.1" 200 -
+12:22:19 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:19] "GET /assets/frappe/dist/css/desk.bundle.ZU56SUY6.css HTTP/1.1" 200 -
+12:22:19 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:19] "GET /assets/hrms/dist/css/hrms.bundle.INY6WK5R.css HTTP/1.1" 200 -
+12:22:19 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:19] "GET /api/method/frappe.desk.doctype.notification_log.notification_log.get_notification_logs?limit=20&_=1763362339358 HTTP/1.1" 200 -
+12:22:19 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:19] "GET /api/method/frappe.desk.doctype.event.event.get_events?start=2025-11-17&end=2025-11-17&_=1763362339359 HTTP/1.1" 200 -
+12:22:19 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:19] "GET /api/method/frappe.desk.desktop.get_desktop_page?page={"name":"Overview","title":"Overview","public":1}&_=1763362339360 HTTP/1.1" 200 -
+12:22:19 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:19] "POST /api/method/frappe.desk.reportview.get_count HTTP/1.1" 200 -
+12:22:23 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:23] "GET /api/method/frappe.desk.form.load.getdoctype?doctype=Employee&with_parent=1&_=1763362339361 HTTP/1.1" 200 -
+12:22:23 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:23] "POST /api/method/frappe.desk.listview.get_list_settings HTTP/1.1" 200 -
+12:22:23 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:23] "GET /api/method/frappe.desk.reportview.get_list?fields=["name","filter_name","for_user","filters"]&filters={"reference_doctype":"Employee"}&or_filters=[["for_user","%3D","Administrator"],["for_user","%3D",""]]&order_by=filter_name%20asc&doctype=List%20Filter&limit=20&_=1763362339362 HTTP/1.1" 200 -
+12:22:23 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:23] "POST /api/method/frappe.desk.reportview.get HTTP/1.1" 200 -
+12:22:23 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:23] "POST /api/method/frappe.model.utils.user_settings.save HTTP/1.1" 200 -
+12:22:23 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:23] "POST /api/method/frappe.model.utils.user_settings.save HTTP/1.1" 200 -
+12:22:23 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:23] "GET /api/method/frappe.desk.reportview.get_count?doctype=Employee&filters=[["Employee","status","%3D","Active"]]&fields=[]&distinct=false&limit=1001&_=1763362339363 HTTP/1.1" 200 -
+12:22:25 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:25] "POST /api/method/frappe.desk.reportview.get HTTP/1.1" 200 -
+12:22:25 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:25] "POST /api/method/frappe.model.utils.user_settings.save HTTP/1.1" 200 -
+12:22:25 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:25] "GET /api/method/frappe.desk.reportview.get_count?doctype=Employee&filters=[]&fields=[]&distinct=false&limit=1001&_=1763362339364 HTTP/1.1" 200 -
+12:22:28 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:28] "POST /api/method/frappe.desk.search.search_link HTTP/1.1" 200 -
+12:22:28 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:28] "GET /assets/frappe/css/fonts/fontawesome/fontawesome-webfont.woff2?v=4.7.0 HTTP/1.1" 200 -
+12:22:29 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:29] "GET /api/method/frappe.client.validate_link?doctype=Gender&docname=Male&fields=[]&_=1763362339365 HTTP/1.1" 200 -
+12:22:33 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:33] "POST /api/method/frappe.desk.doctype.route_history.route_history.deferred_insert HTTP/1.1" 200 -
+12:22:34 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:34] "GET /api/method/frappe.realtime.get_user_info HTTP/1.1" 200 -
+12:22:39 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:39] "GET /api/method/frappe.realtime.has_permission?doctype=Employee&name= HTTP/1.1" 200 -
+12:22:52 web.1         | 127.0.0.1 - - [17/Nov/2025 12:22:52] "POST /api/method/hrms.overrides.employee_master.get_retirement_date HTTP/1.1" 200 -
+12:23:01 web.1         | 127.0.0.1 - - [17/Nov/2025 12:23:01] "POST /api/method/frappe.desk.form.save.savedocs HTTP/1.1" 200 -
+12:23:06 web.1         | 127.0.0.1 - - [17/Nov/2025 12:23:06] "GET /api/method/frappe.realtime.has_permission?doctype=Employee&name=HR-EMP-00001 HTTP/1.1" 200 -
+12:23:06 web.1         | 127.0.0.1 - - [17/Nov/2025 12:23:06] "GET /api/method/frappe.realtime.has_permission?doctype=Employee&name=HR-EMP-00001 HTTP/1.1" 200 -
+12:23:11 web.1         | 127.0.0.1 - - [17/Nov/2025 12:23:11] "GET /api/method/frappe.realtime.has_permission?doctype=Employee&name=HR-EMP-00001 HTTP/1.1" 200 -
+12:23:21 web.1         | 127.0.0.1 - - [17/Nov/2025 12:23:21] "POST /api/method/frappe.desk.reportview.get HTTP/1.1" 200 -
+12:23:21 web.1         | 127.0.0.1 - - [17/Nov/2025 12:23:21] "GET /api/method/frappe.desk.reportview.get_count?doctype=Employee&filters=[]&fields=[]&distinct=false&limit=1001&_=1763362339367 HTTP/1.1" 200 -
+12:23:21 web.1         | 127.0.0.1 - - [17/Nov/2025 12:23:21] "GET /api/method/frappe.desk.form.load.getdoctype?doctype=Shift%20Type&with_parent=1&_=1763362339366 HTTP/1.1" 200 -
+12:23:21 web.1         | 127.0.0.1 - - [17/Nov/2025 12:23:21] "POST /api/method/frappe.desk.listview.get_list_settings HTTP/1.1" 200 -
+12:23:21 web.1         | 127.0.0.1 - - [17/Nov/2025 12:23:21] "GET /api/method/frappe.desk.reportview.get_list?fields=["name","filter_name","for_user","filters"]&filters={"reference_doctype":"Shift%20Type"}&or_filters=[["for_user","%3D","Administrator"],["for_user","%3D",""]]&order_by=filter_name%20asc&doctype=List%20Filter&limit=20&_=1763362339368 HTTP/1.1" 200 -
+12:23:21 web.1         | 127.0.0.1 - - [17/Nov/2025 12:23:21] "POST /api/method/frappe.desk.reportview.get HTTP/1.1" 200 -
+12:23:21 web.1         | 127.0.0.1 - - [17/Nov/2025 12:23:21] "POST /api/method/frappe.model.utils.user_settings.save HTTP/1.1" 200 -
+12:23:21 web.1         | 127.0.0.1 - - [17/Nov/2025 12:23:21] "POST /api/method/frappe.model.utils.user_settings.save HTTP/1.1" 200 -
+12:23:21 web.1         | 127.0.0.1 - - [17/Nov/2025 12:23:21] "GET /api/method/frappe.desk.reportview.get_count?doctype=Shift%20Type&filters=[]&fields=[]&distinct=false&limit=1001&_=1763362339369 HTTP/1.1" 200 -
+12:23:23 web.1         | 127.0.0.1 - - [17/Nov/2025 12:23:23] "GET /api/method/frappe.realtime.has_permission?doctype=Employee&name= HTTP/1.1" 200 -
+12:23:26 web.1         | 127.0.0.1 - - [17/Nov/2025 12:23:26] "GET /api/method/frappe.realtime.has_permission?doctype=Shift+Type&name= HTTP/1.1" 200 -
+12:23:31 web.1         | 127.0.0.1 - - [17/Nov/2025 12:23:31] "POST /api/method/frappe.desk.doctype.route_history.route_history.deferred_insert HTTP/1.1" 200 -
+12:23:56 web.1         | 127.0.0.1 - - [17/Nov/2025 12:23:56] "POST /api/method/frappe.client.save HTTP/1.1" 200 -
+12:23:58 web.1         | 127.0.0.1 - - [17/Nov/2025 12:23:58] "POST /api/method/frappe.desk.reportview.get HTTP/1.1" 200 -
+12:24:00 web.1         | 127.0.0.1 - - [17/Nov/2025 12:24:00] "GET /api/method/frappe.desk.form.load.getdoc?doctype=Shift%20Type&name=Catalog&_=1763362339370 HTTP/1.1" 200 -
+12:24:00 web.1         | 127.0.0.1 - - [17/Nov/2025 12:24:00] "GET /api/method/frappe.desk.notifications.get_open_count?doctype=Shift%20Type&name=Catalog&items=["Attendance","Employee%20Checkin","Shift%20Request","Shift%20Assignment"]&_=1763362339371 HTTP/1.1" 200 -
+12:24:05 web.1         | 127.0.0.1 - - [17/Nov/2025 12:24:05] "GET /api/method/frappe.realtime.has_permission?doctype=Shift+Type&name=Catalog HTTP/1.1" 200 -
+12:24:05 web.1         | 127.0.0.1 - - [17/Nov/2025 12:24:05] "GET /api/method/frappe.realtime.has_permission?doctype=Shift+Type&name=Catalog HTTP/1.1" 200 -
+12:24:06 web.1         | 127.0.0.1 - - [17/Nov/2025 12:24:06] "POST /api/method/frappe.desk.search.search_link HTTP/1.1" 200 -
+12:24:11 web.1         | 127.0.0.1 - - [17/Nov/2025 12:24:11] "POST /api/method/frappe.desk.reportview.get HTTP/1.1" 200 -
+12:24:11 web.1         | 127.0.0.1 - - [17/Nov/2025 12:24:11] "GET /api/method/frappe.desk.reportview.get_count?doctype=Employee&filters=[]&fields=[]&distinct=false&limit=1001&_=1763362339372 HTTP/1.1" 200 -
+12:24:18 web.1         | 127.0.0.1 - - [17/Nov/2025 12:24:18] "GET /api/method/frappe.realtime.has_permission?doctype=Employee&name=HR-EMP-00001 HTTP/1.1" 200 -
+12:24:31 web.1         | 127.0.0.1 - - [17/Nov/2025 12:24:31] "POST /api/method/frappe.desk.doctype.route_history.route_history.deferred_insert HTTP/1.1" 200 -
+12:24:32 web.1         | 127.0.0.1 - - [17/Nov/2025 12:24:32] "POST /api/method/frappe.desk.search.search_link HTTP/1.1" 200 -
+12:24:32 web.1         | 127.0.0.1 - - [17/Nov/2025 12:24:32] "GET /api/method/frappe.client.validate_link?doctype=Shift%20Type&docname=Catalog&fields=[]&_=1763362339373 HTTP/1.1" 200 -
+12:24:34 web.1         | 127.0.0.1 - - [17/Nov/2025 12:24:34] "POST /api/method/frappe.desk.form.save.savedocs HTTP/1.1" 200 -
+12:24:39 web.1         | 127.0.0.1 - - [17/Nov/2025 12:24:39] "GET /api/method/frappe.realtime.has_permission?doctype=Employee&name=HR-EMP-00001 HTTP/1.1" 200 -
+12:24:44 web.1         | 127.0.0.1 - - [17/Nov/2025 12:24:44] "GET /api/method/frappe.desk.form.load.getdoctype?doctype=Employee%20Checkin&with_parent=1&_=1763362339374 HTTP/1.1" 200 -
+12:24:44 web.1         | 127.0.0.1 - - [17/Nov/2025 12:24:44] "POST /api/method/frappe.desk.listview.get_list_settings HTTP/1.1" 200 -
+12:24:44 web.1         | 127.0.0.1 - - [17/Nov/2025 12:24:44] "GET /api/method/frappe.desk.reportview.get_list?fields=["name","filter_name","for_user","filters"]&filters={"reference_doctype":"Employee%20Checkin"}&or_filters=[["for_user","%3D","Administrator"],["for_user","%3D",""]]&order_by=filter_name%20asc&doctype=List%20Filter&limit=20&_=1763362339375 HTTP/1.1" 200 -
+12:24:44 web.1         | 127.0.0.1 - - [17/Nov/2025 12:24:44] "POST /api/method/frappe.desk.reportview.get HTTP/1.1" 200 -
+12:24:44 web.1         | 127.0.0.1 - - [17/Nov/2025 12:24:44] "POST /api/method/frappe.model.utils.user_settings.save HTTP/1.1" 200 -
+12:24:44 web.1         | 127.0.0.1 - - [17/Nov/2025 12:24:44] "POST /api/method/frappe.model.utils.user_settings.save HTTP/1.1" 200 -
+12:24:44 web.1         | 127.0.0.1 - - [17/Nov/2025 12:24:44] "GET /api/method/frappe.desk.reportview.get_count?doctype=Employee%20Checkin&filters=[]&fields=[]&distinct=false&limit=1001&_=1763362339376 HTTP/1.1" 200 -
+12:24:45 web.1         | 127.0.0.1 - - [17/Nov/2025 12:24:45] "GET /assets/frappe/images/leaflet/layers-2x.png HTTP/1.1" 200 -
+12:24:45 web.1         | 127.0.0.1 - - [17/Nov/2025 12:24:45] "GET /api/method/frappe.client.get_single_value?doctype=HR%20Settings&field=allow_geolocation_tracking&_=1763362339377 HTTP/1.1" 200 -
+12:24:46 web.1         | 127.0.0.1 - - [17/Nov/2025 12:24:46] "POST /api/method/frappe.desk.search.search_link HTTP/1.1" 200 -
+12:24:47 web.1         | 127.0.0.1 - - [17/Nov/2025 12:24:47] "GET /api/method/frappe.client.validate_link?doctype=Employee&docname=HR-EMP-00001&fields=["employee_name"]&_=1763362339378 HTTP/1.1" 200 -
+12:24:49 web.1         | 127.0.0.1 - - [17/Nov/2025 12:24:49] "GET /api/method/frappe.realtime.has_permission?doctype=Employee+Checkin&name= HTTP/1.1" 200 -
+12:24:54 web.1         | 127.0.0.1 - - [17/Nov/2025 12:24:54] "POST /api/method/frappe.desk.doctype.route_history.route_history.deferred_insert HTTP/1.1" 200 -
+12:25:07 web.1         | 127.0.0.1 - - [17/Nov/2025 12:25:07] "POST /api/method/frappe.desk.form.save.savedocs HTTP/1.1" 200 -
+12:25:08 web.1         | 127.0.0.1 - - [17/Nov/2025 12:25:08] "GET /api/method/frappe.client.get_single_value?doctype=HR%20Settings&field=allow_geolocation_tracking&_=1763362339379 HTTP/1.1" 200 -
+12:25:08 web.1         | 127.0.0.1 - - [17/Nov/2025 12:25:08] "GET /api/method/frappe.client.get_single_value?doctype=HR%20Settings&field=allow_geolocation_tracking&_=1763362339380 HTTP/1.1" 200 -
+12:25:11 web.1         | 127.0.0.1 - - [17/Nov/2025 12:25:11] "GET /assets/frappe/css/fonts/inter/InterVariable-Italic.woff2 HTTP/1.1" 200 -
+12:25:11 web.1         | 127.0.0.1 - - [17/Nov/2025 12:25:11] "POST /api/method/frappe.desk.reportview.get HTTP/1.1" 200 -
+12:25:11 web.1         | 127.0.0.1 - - [17/Nov/2025 12:25:11] "POST /api/method/frappe.model.utils.user_settings.save HTTP/1.1" 200 -
+12:25:11 web.1         | 127.0.0.1 - - [17/Nov/2025 12:25:11] "GET /api/method/frappe.desk.reportview.get_count?doctype=Employee%20Checkin&filters=[]&fields=[]&distinct=false&limit=1001&_=1763362339381 HTTP/1.1" 200 -
+12:25:13 web.1         | 127.0.0.1 - - [17/Nov/2025 12:25:13] "GET /api/method/frappe.realtime.has_permission?doctype=Employee+Checkin&name=EMP-CKIN-11-2025-000001 HTTP/1.1" 200 -
+12:25:13 web.1         | 127.0.0.1 - - [17/Nov/2025 12:25:13] "GET /api/method/frappe.realtime.has_permission?doctype=Employee+Checkin&name=EMP-CKIN-11-2025-000001 HTTP/1.1" 200 -
+12:25:18 web.1         | 127.0.0.1 - - [17/Nov/2025 12:25:18] "GET /api/method/frappe.realtime.has_permission?doctype=Employee+Checkin&name=EMP-CKIN-11-2025-000001 HTTP/1.1" 200 -
+12:25:18 web.1         | 127.0.0.1 - - [17/Nov/2025 12:25:18] "GET /api/method/frappe.realtime.has_permission?doctype=Employee+Checkin&name= HTTP/1.1" 200 -
+12:25:21 web.1         | 127.0.0.1 - - [17/Nov/2025 12:25:21] "POST /api/method/frappe.desk.doctype.route_history.route_history.deferred_insert HTTP/1.1" 200 -
+12:28:10 web.1         | 127.0.0.1 - - [17/Nov/2025 12:28:10] "GET /app/employee-checkin HTTP/1.1" 200 -
+12:28:10 web.1         | 127.0.0.1 - - [17/Nov/2025 12:28:10] "GET /api/method/frappe.desk.doctype.event.event.get_events?start=2025-11-17&end=2025-11-17&_=1763362690883 HTTP/1.1" 200 -
+12:28:11 web.1         | 127.0.0.1 - - [17/Nov/2025 12:28:11] "GET /api/method/frappe.desk.form.load.getdoctype?doctype=Employee%20Checkin&with_parent=1&_=1763362690884 HTTP/1.1" 200 -
+12:28:11 web.1         | 127.0.0.1 - - [17/Nov/2025 12:28:11] "GET /api/method/frappe.desk.doctype.notification_log.notification_log.get_notification_logs?limit=20&_=1763362690882 HTTP/1.1" 200 -
+12:28:11 web.1         | 127.0.0.1 - - [17/Nov/2025 12:28:11] "POST /api/method/frappe.desk.listview.get_list_settings HTTP/1.1" 200 -
+12:28:11 web.1         | 127.0.0.1 - - [17/Nov/2025 12:28:11] "GET /api/method/frappe.desk.reportview.get_list?fields=["name","filter_name","for_user","filters"]&filters={"reference_doctype":"Employee%20Checkin"}&or_filters=[["for_user","%3D","Administrator"],["for_user","%3D",""]]&order_by=filter_name%20asc&doctype=List%20Filter&limit=20&_=1763362690885 HTTP/1.1" 200 -
+12:28:11 web.1         | 127.0.0.1 - - [17/Nov/2025 12:28:11] "POST /api/method/frappe.desk.reportview.get HTTP/1.1" 200 -
+12:28:11 web.1         | 127.0.0.1 - - [17/Nov/2025 12:28:11] "GET /api/method/frappe.desk.reportview.get_count?doctype=Employee%20Checkin&filters=[]&fields=[]&distinct=false&limit=1001&_=1763362690886 HTTP/1.1" 200 -
+12:28:21 web.1         | 127.0.0.1 - - [17/Nov/2025 12:28:21] "POST /api/method/frappe.desk.doctype.route_history.route_history.deferred_insert HTTP/1.1" 200 -
+12:28:23 web.1         | 127.0.0.1 - - [17/Nov/2025 12:28:23] "GET /api/method/frappe.realtime.get_user_info HTTP/1.1" 200 -
+12:28:28 web.1         | 127.0.0.1 - - [17/Nov/2025 12:28:28] "GET /api/method/frappe.realtime.has_permission?doctype=Employee+Checkin&name= HTTP/1.1" 200 -
+12:28:54 web.1         | 127.0.0.1 - - [17/Nov/2025 12:28:54] "GET /assets/frappe/dist/js/desk.bundle.4K6I5JVH.js.map HTTP/1.1" 200 -
+12:28:54 web.1         | 127.0.0.1 - - [17/Nov/2025 12:28:54] "GET /assets/frappe/dist/js/libs.bundle.LLRFRX7M.js.map HTTP/1.1" 200 -
+12:28:54 web.1         | 127.0.0.1 - - [17/Nov/2025 12:28:54] "GET /assets/frappe/dist/js/form.bundle.AVPIFT75.js.map HTTP/1.1" 200 -
+12:28:54 web.1         | 127.0.0.1 - - [17/Nov/2025 12:28:54] "GET /assets/frappe/dist/js/list.bundle.KYKUURZC.js.map HTTP/1.1" 200 -
+12:28:54 web.1         | 127.0.0.1 - - [17/Nov/2025 12:28:54] "GET /assets/frappe/dist/js/controls.bundle.UBISUQJI.js.map HTTP/1.1" 200 -
+12:28:54 web.1         | 127.0.0.1 - - [17/Nov/2025 12:28:54] "GET /assets/frappe/dist/js/report.bundle.BHPTKPTS.js.map HTTP/1.1" 200 -
+12:28:54 web.1         | 127.0.0.1 - - [17/Nov/2025 12:28:54] "GET /assets/frappe/dist/js/telemetry.bundle.ZJBT5ETW.js.map HTTP/1.1" 200 -
+12:28:54 web.1         | 127.0.0.1 - - [17/Nov/2025 12:28:54] "GET /assets/erpnext/dist/js/erpnext.bundle.QEBQVODX.js.map HTTP/1.1" 200 -
+12:28:54 web.1         | 127.0.0.1 - - [17/Nov/2025 12:28:54] "GET /assets/hrms/dist/js/hrms.bundle.HOCVKNCN.js.map HTTP/1.1" 200 -
+12:28:54 web.1         | 127.0.0.1 - - [17/Nov/2025 12:28:54] "GET /assets/frappe/dist/js/billing.bundle.CPRCUCBA.js.map HTTP/1.1" 200 -
+12:28:54 web.1         | 127.0.0.1 - - [17/Nov/2025 12:28:54] "GET /assets/frappe/dist/css/desk.bundle.ZU56SUY6.css.map HTTP/1.1" 200 -
+12:28:54 web.1         | 127.0.0.1 - - [17/Nov/2025 12:28:54] "GET /app/file_uploader.bundle.4AYFLFB3.css.map HTTP/1.1" 200 -
+12:28:54 web.1         | 127.0.0.1 - - [17/Nov/2025 12:28:54] "GET /app/file_uploader.bundle.XGOBNNJT.js.map HTTP/1.1" 200 -
+12:28:54 web.1         | 127.0.0.1 - - [17/Nov/2025 12:28:54] "GET /assets/frappe/dist/css/report.bundle.RX65GEYH.css.map HTTP/1.1" 200 -
+12:28:54 web.1         | 127.0.0.1 - - [17/Nov/2025 12:28:54] "GET /assets/erpnext/dist/css/erpnext.bundle.4CNBWDCD.css.map HTTP/1.1" 200 -
+12:28:54 web.1         | 127.0.0.1 - - [17/Nov/2025 12:28:54] "GET /assets/hrms/dist/css/hrms.bundle.INY6WK5R.css.map HTTP/1.1" 200 -
+12:28:59 web.1         | 127.0.0.1 - - [17/Nov/2025 12:28:59] "GET /api/method/frappe.desk.form.load.getdoc?doctype=Employee%20Checkin&name=EMP-CKIN-11-2025-000001&_=1763362690887 HTTP/1.1" 200 -
+12:28:59 web.1         | 127.0.0.1 - - [17/Nov/2025 12:28:59] "GET /api/method/frappe.client.get_single_value?doctype=HR%20Settings&field=allow_geolocation_tracking&_=1763362690888 HTTP/1.1" 200 -
+12:29:04 web.1         | 127.0.0.1 - - [17/Nov/2025 12:29:04] "GET /api/method/frappe.realtime.has_permission?doctype=Employee+Checkin&name=EMP-CKIN-11-2025-000001 HTTP/1.1" 200 -
+12:29:04 web.1         | 127.0.0.1 - - [17/Nov/2025 12:29:04] "GET /api/method/frappe.realtime.has_permission?doctype=Employee+Checkin&name=EMP-CKIN-11-2025-000001 HTTP/1.1" 200 -
+12:29:31 web.1         | 127.0.0.1 - - [17/Nov/2025 12:29:31] "POST /api/method/frappe.desk.doctype.route_history.route_history.deferred_insert HTTP/1.1" 200 -
+12:29:31 web.1         | 127.0.0.1 - - [17/Nov/2025 12:29:31] "POST /api/method/frappe.desk.reportview.get HTTP/1.1" 200 -
+12:29:31 web.1         | 127.0.0.1 - - [17/Nov/2025 12:29:31] "GET /api/method/frappe.desk.reportview.get_count?doctype=Employee%20Checkin&filters=[]&fields=[]&distinct=false&limit=1001&_=1763362690889 HTTP/1.1" 200 -
+12:33:03 web.1         | 127.0.0.1 - - [17/Nov/2025 12:33:03] "GET /app/employee-checkin HTTP/1.1" 200 -
+12:33:03 web.1         | 127.0.0.1 - - [17/Nov/2025 12:33:03] "GET /app/file_uploader.bundle.XGOBNNJT.js.map HTTP/1.1" 200 -
+12:33:03 web.1         | 127.0.0.1 - - [17/Nov/2025 12:33:03] "GET /api/method/frappe.desk.doctype.notification_log.notification_log.get_notification_logs?limit=20&_=1763362983437 HTTP/1.1" 200 -
+12:33:03 web.1         | 127.0.0.1 - - [17/Nov/2025 12:33:03] "GET /api/method/frappe.desk.doctype.event.event.get_events?start=2025-11-17&end=2025-11-17&_=1763362983438 HTTP/1.1" 200 -
+12:33:03 web.1         | 127.0.0.1 - - [17/Nov/2025 12:33:03] "GET /app/file_uploader.bundle.4AYFLFB3.css.map HTTP/1.1" 200 -
+12:33:03 web.1         | 127.0.0.1 - - [17/Nov/2025 12:33:03] "GET /api/method/frappe.desk.form.load.getdoctype?doctype=Employee%20Checkin&with_parent=1&_=1763362983439 HTTP/1.1" 200 -
+12:33:03 web.1         | 127.0.0.1 - - [17/Nov/2025 12:33:03] "POST /api/method/frappe.desk.listview.get_list_settings HTTP/1.1" 200 -
+12:33:03 web.1         | 127.0.0.1 - - [17/Nov/2025 12:33:03] "GET /api/method/frappe.desk.reportview.get_list?fields=["name","filter_name","for_user","filters"]&filters={"reference_doctype":"Employee%20Checkin"}&or_filters=[["for_user","%3D","Administrator"],["for_user","%3D",""]]&order_by=filter_name%20asc&doctype=List%20Filter&limit=20&_=1763362983440 HTTP/1.1" 200 -
+12:33:03 web.1         | 127.0.0.1 - - [17/Nov/2025 12:33:03] "POST /api/method/frappe.desk.reportview.get HTTP/1.1" 200 -
+12:33:03 web.1         | 127.0.0.1 - - [17/Nov/2025 12:33:03] "GET /api/method/frappe.desk.reportview.get_count?doctype=Employee%20Checkin&filters=[]&fields=[]&distinct=false&limit=1001&_=1763362983441 HTTP/1.1" 200 -
+12:33:13 web.1         | 127.0.0.1 - - [17/Nov/2025 12:33:13] "POST /api/method/frappe.desk.doctype.route_history.route_history.deferred_insert HTTP/1.1" 200 -
+12:33:17 web.1         | 127.0.0.1 - - [17/Nov/2025 12:33:17] "GET /api/method/frappe.realtime.get_user_info HTTP/1.1" 200 -
+12:33:22 web.1         | 127.0.0.1 - - [17/Nov/2025 12:33:22] "GET /api/method/frappe.realtime.has_permission?doctype=Employee+Checkin&name= HTTP/1.1" 200 -
+12:33:37 web.1         | 127.0.0.1 - - [17/Nov/2025 12:33:37] "GET /app/employee-checkin HTTP/1.1" 200 -
+12:33:37 web.1         | 127.0.0.1 - - [17/Nov/2025 12:33:37] "GET /app/file_uploader.bundle.XGOBNNJT.js.map HTTP/1.1" 200 -
+12:33:37 web.1         | 127.0.0.1 - - [17/Nov/2025 12:33:37] "GET /app/file_uploader.bundle.4AYFLFB3.css.map HTTP/1.1" 200 -
+12:33:37 web.1         | 127.0.0.1 - - [17/Nov/2025 12:33:37] "GET /api/method/frappe.desk.doctype.notification_log.notification_log.get_notification_logs?limit=20&_=1763363017698 HTTP/1.1" 200 -
+12:33:37 web.1         | 127.0.0.1 - - [17/Nov/2025 12:33:37] "GET /api/method/frappe.desk.doctype.event.event.get_events?start=2025-11-17&end=2025-11-17&_=1763363017699 HTTP/1.1" 200 -
+12:33:37 web.1         | 127.0.0.1 - - [17/Nov/2025 12:33:37] "GET /api/method/frappe.desk.form.load.getdoctype?doctype=Employee%20Checkin&with_parent=1&_=1763363017700 HTTP/1.1" 200 -
+12:33:37 web.1         | 127.0.0.1 - - [17/Nov/2025 12:33:37] "POST /api/method/frappe.desk.listview.get_list_settings HTTP/1.1" 200 -
+12:33:38 web.1         | 127.0.0.1 - - [17/Nov/2025 12:33:38] "GET /api/method/frappe.desk.reportview.get_list?fields=["name","filter_name","for_user","filters"]&filters={"reference_doctype":"Employee%20Checkin"}&or_filters=[["for_user","%3D","Administrator"],["for_user","%3D",""]]&order_by=filter_name%20asc&doctype=List%20Filter&limit=20&_=1763363017701 HTTP/1.1" 200 -
+12:33:38 web.1         | 127.0.0.1 - - [17/Nov/2025 12:33:38] "POST /api/method/frappe.desk.reportview.get HTTP/1.1" 200 -
+12:33:38 web.1         | 127.0.0.1 - - [17/Nov/2025 12:33:38] "GET /api/method/frappe.desk.reportview.get_count?doctype=Employee%20Checkin&filters=[]&fields=[]&distinct=false&limit=1001&_=1763363017702 HTTP/1.1" 200 -
+12:33:39 web.1         | 127.0.0.1 - - [17/Nov/2025 12:33:39] "GET /api/method/frappe.desk.form.load.getdoc?doctype=Employee%20Checkin&name=EMP-CKIN-11-2025-000001&_=1763363017703 HTTP/1.1" 200 -
+12:33:39 web.1         | 127.0.0.1 - - [17/Nov/2025 12:33:39] "GET /api/method/frappe.client.get_single_value?doctype=HR%20Settings&field=allow_geolocation_tracking&_=1763363017704 HTTP/1.1" 200 -
+12:33:42 web.1         | 127.0.0.1 - - [17/Nov/2025 12:33:42] "GET /api/method/frappe.realtime.get_user_info HTTP/1.1" 200 -
+12:33:47 web.1         | 127.0.0.1 - - [17/Nov/2025 12:33:47] "GET /api/method/frappe.realtime.has_permission?doctype=Employee+Checkin&name= HTTP/1.1" 200 -
+12:33:47 web.1         | 127.0.0.1 - - [17/Nov/2025 12:33:47] "GET /api/method/frappe.realtime.has_permission?doctype=Employee+Checkin&name=EMP-CKIN-11-2025-000001 HTTP/1.1" 200 -
+12:33:48 web.1         | 127.0.0.1 - - [17/Nov/2025 12:33:48] "POST /api/method/frappe.desk.doctype.route_history.route_history.deferred_insert HTTP/1.1" 200 -
+12:33:52 web.1         | 127.0.0.1 - - [17/Nov/2025 12:33:52] "GET /api/method/frappe.realtime.has_permission?doctype=Employee+Checkin&name=EMP-CKIN-11-2025-000001 HTTP/1.1" 200 -
+12:34:49 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:49] "GET /app/employee-checkin/EMP-CKIN-11-2025-000001 HTTP/1.1" 200 -
+12:34:49 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:49] "GET /assets/frappe/icons/timeless/icons.svg?v=1763363060.601212 HTTP/1.1" 200 -
+12:34:49 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:49] "GET /assets/hrms/dist/js/hrms.bundle.BRBK2FYP.js HTTP/1.1" 200 -
+12:34:49 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:49] "GET /assets/hrms/dist/css/hrms.bundle.GD6IZENV.css HTTP/1.1" 200 -
+12:34:49 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:49] "GET /assets/frappe/icons/espresso/icons.svg?v=1763363060.601212 HTTP/1.1" 200 -
+12:34:49 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:49] "GET /assets/erpnext/icons/pos-icons.svg?v=1763363060.601212 HTTP/1.1" 200 -
+12:34:49 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:49] "GET /assets/erpnext/images/erpnext-logo.svg HTTP/1.1" 200 -
+12:34:50 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:50] "GET /assets/frappe/css/fonts/inter/InterVariable.woff2 HTTP/1.1" 200 -
+12:34:50 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:50] "GET /assets/hrms/dist/css/hrms.bundle.GD6IZENV.css.map HTTP/1.1" 200 -
+12:34:50 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:50] "GET /assets/frappe/dist/js/file_uploader.bundle.XGOBNNJT.js HTTP/1.1" 200 -
+12:34:50 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:50] "GET /assets/frappe/sounds/cancel.mp3 HTTP/1.1" 200 -
+12:34:50 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:50] "GET /assets/frappe/sounds/email.mp3 HTTP/1.1" 200 -
+12:34:50 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:50] "GET /assets/frappe/sounds/submit.mp3 HTTP/1.1" 200 -
+12:34:50 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:50] "GET /assets/frappe/sounds/error.mp3 HTTP/1.1" 200 -
+12:34:50 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:50] "GET /assets/frappe/sounds/click.mp3 HTTP/1.1" 200 -
+12:34:50 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:50] "GET /assets/frappe/sounds/delete.mp3 HTTP/1.1" 200 -
+12:34:50 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:50] "GET /assets/erpnext/sounds/call-disconnect.mp3 HTTP/1.1" 200 -
+12:34:50 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:50] "GET /assets/frappe/sounds/alert.mp3 HTTP/1.1" 200 -
+12:34:50 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:50] "GET /assets/erpnext/sounds/incoming-call.mp3 HTTP/1.1" 200 -
+12:34:50 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:50] "GET /assets/frappe/images/frappe-framework-logo.svg HTTP/1.1" 200 -
+12:34:50 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:50] "GET /assets/erpnext/sounds/numpad-touch.mp3 HTTP/1.1" 200 -
+12:34:50 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:50] "GET /assets/frappe/images/ui-states/notification-empty-state.svg HTTP/1.1" 200 -
+12:34:50 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:50] "GET /assets/hrms/images/frappe-hr-logo.svg HTTP/1.1" 200 -
+12:34:50 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:50] "GET /api/method/frappe.desk.doctype.event.event.get_events?start=2025-11-17&end=2025-11-17&_=1763363090031 HTTP/1.1" 200 -
+12:34:50 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:50] "GET /assets/frappe/images/web.svg HTTP/1.1" 200 -
+12:34:50 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:50] "GET /assets/frappe/images/settings-gear.svg HTTP/1.1" 200 -
+12:34:50 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:50] "GET /assets/hrms/dist/js/hrms.bundle.BRBK2FYP.js.map HTTP/1.1" 200 -
+12:34:50 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:50] "GET /assets/frappe/images/ui-states/event-empty-state.svg HTTP/1.1" 200 -
+12:34:50 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:50] "GET /api/method/frappe.desk.doctype.notification_log.notification_log.get_notification_logs?limit=20&_=1763363090030 HTTP/1.1" 200 -
+12:34:50 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:50] "GET /assets/erpnext/images/erpnext-favicon.svg HTTP/1.1" 200 -
+12:34:50 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:50] "GET /app/employee-checkin/file_uploader.bundle.XGOBNNJT.js.map HTTP/1.1" 200 -
+12:34:50 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:50] "GET /app/employee-checkin/file_uploader.bundle.4AYFLFB3.css.map HTTP/1.1" 200 -
+12:34:50 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:50] "GET /api/method/frappe.desk.form.load.getdoctype?doctype=Employee%20Checkin&with_parent=1&_=1763363090032 HTTP/1.1" 200 -
+12:34:50 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:50] "GET /api/method/frappe.desk.form.load.getdoc?doctype=Employee%20Checkin&name=EMP-CKIN-11-2025-000001&_=1763363090033 HTTP/1.1" 200 -
+12:34:50 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:50] "GET /assets/frappe/css/fonts/fontawesome/fontawesome-webfont.woff2?v=4.7.0 HTTP/1.1" 200 -
+12:34:50 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:50] "GET /api/method/frappe.client.get_single_value?doctype=HR%20Settings&field=allow_geolocation_tracking&_=1763363090034 HTTP/1.1" 200 -
+12:34:56 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:56] "POST /api/method/frappe.sessions.clear HTTP/1.1" 200 -
+12:34:56 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:56] "GET /app/employee-checkin/EMP-CKIN-11-2025-000001 HTTP/1.1" 200 -
+12:34:56 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:56] "GET /app/employee-checkin/file_uploader.bundle.XGOBNNJT.js.map HTTP/1.1" 200 -
+12:34:56 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:56] "GET /app/employee-checkin/file_uploader.bundle.4AYFLFB3.css.map HTTP/1.1" 200 -
+12:34:56 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:56] "GET /api/method/frappe.desk.doctype.notification_log.notification_log.get_notification_logs?limit=20&_=1763363096740 HTTP/1.1" 200 -
+12:34:56 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:56] "GET /api/method/frappe.desk.doctype.event.event.get_events?start=2025-11-17&end=2025-11-17&_=1763363096741 HTTP/1.1" 200 -
+12:34:56 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:56] "GET /api/method/frappe.desk.form.load.getdoctype?doctype=Employee%20Checkin&with_parent=1&_=1763363096742 HTTP/1.1" 200 -
+12:34:57 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:57] "GET /api/method/frappe.desk.form.load.getdoc?doctype=Employee%20Checkin&name=EMP-CKIN-11-2025-000001&_=1763363096743 HTTP/1.1" 200 -
+12:34:57 web.1         | 127.0.0.1 - - [17/Nov/2025 12:34:57] "GET /api/method/frappe.client.get_single_value?doctype=HR%20Settings&field=allow_geolocation_tracking&_=1763363096744 HTTP/1.1" 200 -
+12:35:03 web.1         | 127.0.0.1 - - [17/Nov/2025 12:35:03] "GET /api/method/frappe.realtime.get_user_info HTTP/1.1" 200 -
+12:35:08 web.1         | 127.0.0.1 - - [17/Nov/2025 12:35:08] "GET /api/method/frappe.realtime.has_permission?doctype=Employee+Checkin&name=EMP-CKIN-11-2025-000001 HTTP/1.1" 200 -
+12:35:08 web.1         | 127.0.0.1 - - [17/Nov/2025 12:35:08] "GET /api/method/frappe.realtime.has_permission?doctype=Employee+Checkin&name=EMP-CKIN-11-2025-000001 HTTP/1.1" 200 -
+12:35:12 web.1         | 127.0.0.1 - - [17/Nov/2025 12:35:12] "POST /api/method/frappe.sessions.clear HTTP/1.1" 200 -
+12:35:12 web.1         | 127.0.0.1 - - [17/Nov/2025 12:35:12] "GET /app/employee-checkin/EMP-CKIN-11-2025-000001 HTTP/1.1" 200 -
+12:35:12 web.1         | 127.0.0.1 - - [17/Nov/2025 12:35:12] "GET /api/method/frappe.desk.doctype.notification_log.notification_log.get_notification_logs?limit=20&_=1763363112479 HTTP/1.1" 200 -
+12:35:12 web.1         | 127.0.0.1 - - [17/Nov/2025 12:35:12] "GET /api/method/frappe.desk.doctype.event.event.get_events?start=2025-11-17&end=2025-11-17&_=1763363112480 HTTP/1.1" 200 -
+12:35:12 web.1         | 127.0.0.1 - - [17/Nov/2025 12:35:12] "GET /api/method/frappe.desk.form.load.getdoctype?doctype=Employee%20Checkin&with_parent=1&_=1763363112481 HTTP/1.1" 200 -
+12:35:12 web.1         | 127.0.0.1 - - [17/Nov/2025 12:35:12] "GET /api/method/frappe.desk.form.load.getdoc?doctype=Employee%20Checkin&name=EMP-CKIN-11-2025-000001&_=1763363112482 HTTP/1.1" 200 -
+12:35:12 web.1         | 127.0.0.1 - - [17/Nov/2025 12:35:12] "GET /app/employee-checkin/file_uploader.bundle.4AYFLFB3.css.map HTTP/1.1" 200 -
+12:35:12 web.1         | 127.0.0.1 - - [17/Nov/2025 12:35:12] "GET /app/employee-checkin/file_uploader.bundle.XGOBNNJT.js.map HTTP/1.1" 200 -
+12:35:12 web.1         | 127.0.0.1 - - [17/Nov/2025 12:35:12] "GET /api/method/frappe.client.get_single_value?doctype=HR%20Settings&field=allow_geolocation_tracking&_=1763363112483 HTTP/1.1" 200 -
+12:35:15 web.1         | 127.0.0.1 - - [17/Nov/2025 12:35:15] "POST /api/method/frappe.desk.listview.get_list_settings HTTP/1.1" 200 -
+12:35:15 web.1         | 127.0.0.1 - - [17/Nov/2025 12:35:15] "GET /api/method/frappe.desk.reportview.get_list?fields=["name","filter_name","for_user","filters"]&filters={"reference_doctype":"Employee%20Checkin"}&or_filters=[["for_user","%3D","Administrator"],["for_user","%3D",""]]&order_by=filter_name%20asc&doctype=List%20Filter&limit=20&_=1763363112484 HTTP/1.1" 200 -
+12:35:15 web.1         | 127.0.0.1 - - [17/Nov/2025 12:35:15] "POST /api/method/frappe.desk.reportview.get HTTP/1.1" 200 -
+12:35:15 web.1         | 127.0.0.1 - - [17/Nov/2025 12:35:15] "POST /api/method/frappe.model.utils.user_settings.save HTTP/1.1" 200 -
+12:35:15 web.1         | 127.0.0.1 - - [17/Nov/2025 12:35:15] "POST /api/method/frappe.model.utils.user_settings.save HTTP/1.1" 200 -
+12:35:15 web.1         | 127.0.0.1 - - [17/Nov/2025 12:35:15] "GET /api/method/frappe.desk.reportview.get_count?doctype=Employee%20Checkin&filters=[]&fields=[]&distinct=false&limit=1001&_=1763363112485 HTTP/1.1" 200 -
+12:35:17 web.1         | 127.0.0.1 - - [17/Nov/2025 12:35:17] "GET /api/method/frappe.realtime.get_user_info HTTP/1.1" 200 -
+12:35:22 web.1         | 127.0.0.1 - - [17/Nov/2025 12:35:22] "GET /api/method/frappe.realtime.has_permission?doctype=Employee+Checkin&name=EMP-CKIN-11-2025-000001 HTTP/1.1" 200 -
+12:35:22 web.1         | 127.0.0.1 - - [17/Nov/2025 12:35:22] "GET /api/method/frappe.realtime.has_permission?doctype=Employee+Checkin&name=EMP-CKIN-11-2025-000001 HTTP/1.1" 200 -
+12:35:25 web.1         | 127.0.0.1 - - [17/Nov/2025 12:35:25] "POST /api/method/frappe.desk.doctype.route_history.route_history.deferred_insert HTTP/1.1" 200 -
+12:35:27 web.1         | 127.0.0.1 - - [17/Nov/2025 12:35:27] "GET /api/method/frappe.realtime.has_permission?doctype=Employee+Checkin&name= HTTP/1.1" 200 -
+12:35:28 web.1         | 127.0.0.1 - - [17/Nov/2025 12:35:28] "GET /api/method/frappe.client.get_single_value?doctype=HR%20Settings&field=allow_geolocation_tracking&_=1763363112486 HTTP/1.1" 200 -
+12:35:29 web.1         | 127.0.0.1 - - [17/Nov/2025 12:35:29] "POST /api/method/frappe.desk.search.search_link HTTP/1.1" 200 -
+12:35:30 web.1         | 127.0.0.1 - - [17/Nov/2025 12:35:30] "GET /api/method/frappe.client.validate_link?doctype=Employee&docname=HR-EMP-00001&fields=["employee_name"]&_=1763363112487 HTTP/1.1" 200 -
+12:35:33 web.1         | 127.0.0.1 - - [17/Nov/2025 12:35:33] "GET /api/method/frappe.realtime.has_permission?doctype=Employee+Checkin&name=new-employee-checkin-qketmvnkdf HTTP/1.1" 200 -
+12:38:24 redis_queue.1 | 22683:signal-handler (1763363304) Received SIGTERM scheduling shutdown...
+12:38:24 redis_cache.1 | 22684:signal-handler (1763363304) Received SIGTERM scheduling shutdown...
+12:38:25 redis_cache.1 | 22684:M 17 Nov 2025 12:38:25.041 * User requested shutdown...
+12:38:25 redis_queue.1 | 22683:M 17 Nov 2025 12:38:25.041 * User requested shutdown...
+12:38:25 redis_queue.1 | 22683:M 17 Nov 2025 12:38:25.041 * Saving the final RDB snapshot before exiting.
+12:38:25 redis_cache.1 | 22684:M 17 Nov 2025 12:38:25.042 * Removing the pid file.
+12:38:25 redis_cache.1 | 22684:M 17 Nov 2025 12:38:25.042 # Redis is now ready to exit, bye bye...
+12:38:25 system        | redis_cache.1 stopped (rc=0)
+12:38:25 system        | sending SIGTERM to redis_queue.1 (pid 22683)
+12:38:25 system        | sending SIGTERM to web.1 (pid 22682)
+12:38:25 system        | sending SIGTERM to socketio.1 (pid 22687)
+12:38:25 system        | sending SIGTERM to watch.1 (pid 22685)
+12:38:25 system        | sending SIGTERM to schedule.1 (pid 22688)
+12:38:25 system        | sending SIGTERM to worker.1 (pid 22686)
+12:38:25 redis_queue.1 | 22683:signal-handler (1763363305) Received SIGTERM scheduling shutdown...
+12:38:25 redis_queue.1 | 22683:M 17 Nov 2025 12:38:25.049 * DB saved on disk
+12:38:25 redis_queue.1 | 22683:M 17 Nov 2025 12:38:25.049 * Removing the pid file.
+12:38:25 redis_queue.1 | 22683:M 17 Nov 2025 12:38:25.050 # Redis is now ready to exit, bye bye...
+12:38:25 system        | redis_queue.1 stopped (rc=0)
+12:38:25 system        | socketio.1 stopped (rc=-15)
+12:38:25 system        | worker.1 stopped (rc=-15)
+12:38:25 system        | schedule.1 stopped (rc=-15)
+12:38:25 web.1         | /opt/homebrew/Cellar/python@3.13/3.13.9_1/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/resource_tracker.py:324: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown: {'/mp-psrp8quo'}
+12:38:25 web.1         |   warnings.warn(
+12:38:25 system        | watch.1 stopped (rc=-15)
+12:38:25 system        | web.1 stopped (rc=0)
