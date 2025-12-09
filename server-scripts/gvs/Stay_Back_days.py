@@ -3,7 +3,7 @@ def execute():
     print("STARTING STAYBACK ABSENT CHECK (Prioritize Present/Working, fallback to Half Day)")
     print("=" * 70)
 
-    today = frappe.utils.getdate()
+    today = frappe.utils.getdate('2025-12-08')
     weekday = today.weekday()
     if weekday == 6:  # Today is Sunday
         days_since_sunday = 7
@@ -151,20 +151,20 @@ def send_stayback_absent_mail(emp, absent_day, worked):
       </div>
       <div class="content" style="color: #0f1e3d; border-radius: 12px">
         <h2 style="font-size: 20px; font-weight: 500; color: #0f1e3d;">
-          Hey {emp_first},
+          Dear {emp_first},
         </h2>
         <p style="color: #3d475c; font-size: 14px; font-weight: 400;">
-          As per Stay Back policy for <strong>Vacation Staff</strong>, you must complete <strong>at least 8 hours 15 minutes (8.25h)</strong> working on any one day of the week.
+            As per the Stay Back policy, it is required to complete a minimum of 8 hours of work on at least one day during the week.
         </p>
         <ul style="color: #3d475c; font-size: 14px; font-weight: 400; padding-left: 20px;">
-          <li><strong>Date Absent Marked:</strong> {attendance_date_str}</li>
-          <li><strong>Your Working Hours on that day:</strong> {worked_h}h {worked_m}m</li>
+          <li><strong>Date marked as Absent</strong> {attendance_date_str}</li>
+          <li><strong>Recorded working hours on that day:</strong> {worked_h}h {worked_m}m</li>
         </ul>
         <p style='color:#b3261e;font-size:14px;font-weight:500;'>
-          As you did not attend any stay back day (no day ≥ 8h 15m this week), one day has been marked as <strong>Absent</strong> in your attendance.
+          Since there was no day during the week where the required stay-back duration (≥ 8 hours) was completed, the above-mentioned date has been marked as Absent (LOP) in your attendance records.
         </p>
         <p style="color: #3d475c; font-size: 14px; font-weight: 400;">
-          If you believe this is incorrect, please reach out to your HR team.
+          If you believe this marking is incorrect or need any clarification, please feel free to reach out to the HR team.
         </p>
         <p style="color: #3d475c; font-size: 14px; font-weight: 400;">
           Best regards,<br>HR Team
