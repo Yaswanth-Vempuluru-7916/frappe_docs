@@ -18,10 +18,23 @@ def execute():
     print(f"Checking previous week: {str(start_of_week)} to {str(end_of_week)}")
 
     # Fetch shift end time
-    shift_end_time = frappe.db.get_value("Shift Type", VACATION_SHIFT, "end_time")
-    if not shift_end_time:
+    shift_end_time_raw = frappe.db.get_value("Shift Type", VACATION_SHIFT, "end_time")
+    if not shift_end_time_raw:
         print(f"ERROR: Could not find end_time for shift '{VACATION_SHIFT}'")
         return
+    
+    # Convert timedelta to time object if needed
+    try:
+        # Try to use it directly as a time object first
+        shift_end_time = frappe.utils.get_time(shift_end_time_raw)
+    except:
+        # If that fails, assume it's a timedelta and convert it
+        total_seconds = int(shift_end_time_raw.total_seconds())
+        hours = total_seconds // 3600
+        minutes = (total_seconds % 3600) // 60
+        seconds = total_seconds % 60
+        shift_end_time = frappe.utils.get_time(f"{hours:02d}:{minutes:02d}:{seconds:02d}")
+    
     print(f"Shift end time: {shift_end_time}")
 
     employees = frappe.get_all(
