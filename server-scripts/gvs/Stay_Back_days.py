@@ -1,3 +1,5 @@
+VACATION_SHIFT = "Vacation Staff Shift"
+
 def execute():
     print("=" * 70)
     print("STARTING STAYBACK ABSENT CHECK (Prioritize Present/Working, fallback to Half Day)")
@@ -15,9 +17,29 @@ def execute():
 
     print(f"Checking previous week: {str(start_of_week)} to {str(end_of_week)}")
 
+    # Fetch shift end time
+    shift_end_time_raw = frappe.db.get_value("Shift Type", VACATION_SHIFT, "end_time")
+    if not shift_end_time_raw:
+        print(f"ERROR: Could not find end_time for shift '{VACATION_SHIFT}'")
+        return
+    
+    # Convert timedelta to time object if needed
+    try:
+        # Try to use it directly as a time object first
+        shift_end_time = frappe.utils.get_time(shift_end_time_raw)
+    except:
+        # If that fails, assume it's a timedelta and convert it
+        total_seconds = int(shift_end_time_raw.total_seconds())
+        hours = total_seconds // 3600
+        minutes = (total_seconds % 3600) // 60
+        seconds = total_seconds % 60
+        shift_end_time = frappe.utils.get_time(f"{hours:02d}:{minutes:02d}:{seconds:02d}")
+    
+    print(f"Shift end time: {shift_end_time}")
+
     employees = frappe.get_all(
         "Employee",
-        filters={"status": "Active", "default_shift": "Vacation Staff Shift"},
+        filters={"status": "Active", "default_shift": VACATION_SHIFT},
         fields=["name", "employee_name", "default_shift", "company_email", "user_id"]
     )
     print(f"Found {len(employees)} vacation staff employees")
@@ -35,33 +57,38 @@ def execute():
                 "docstatus": 1,
                 "status": ["in", ["Present", "Working"]]
             },
-            fields=["name", "attendance_date", "working_hours", "status"],
+            fields=["name", "attendance_date", "out_time", "status"],
             order_by="attendance_date asc"
         )
         
-        found_8_25 = False
-        below_pres = []
+        found_stayback = False
+        early_exit_pres = []
         for att in pres_att:
-            wh = 0
-            try:
-                wh = float(att.get("working_hours") or 0)
-            except Exception:
-                pass
-            print(f"{att['attendance_date']}[{att['status']}]: {wh}")
-            if wh >= 8.25:
-                found_8_25 = True
+            out_time = att.get("out_time")
+            out_time_only = None
+            if out_time:
+                if isinstance(out_time, str):
+                    out_time_only = frappe.utils.get_time(out_time)
+                else:
+                    out_time_only = out_time.time()
+            
+            print(f"{att['attendance_date']}[{att['status']}]: out_time={out_time_only}")
+            
+            if out_time_only and out_time_only > shift_end_time:
+                found_stayback = True
+                print(f"  -> Stay back detected! {out_time_only} > {shift_end_time}")
             else:
-                below_pres.append([str(att["attendance_date"]), att["name"], wh, att['status']])
+                early_exit_pres.append([str(att["attendance_date"]), att["name"], out_time_only, att['status']])
 
-        # If there's a present/working stay back, do nothing
-        if found_8_25:
-            print("Attendance OK: at least one 'Present'/'Working' day >= 8.25 hours.")
+        # If there's a valid stay back, do nothing
+        if found_stayback:
+            print("Attendance OK: at least one 'Present'/'Working' day with checkout after shift end time.")
             continue
 
-        # If any Present/Working < 8.25, mark the first as absent
-        if below_pres:
-            first = sorted(below_pres, key=lambda t: t[0])[0]
-            mark_absent_and_notify(emp, first[0], first[1], first[2], first[3])
+        # If any Present/Working with early exit, mark the first as absent
+        if early_exit_pres:
+            first = sorted(early_exit_pres, key=lambda t: t[0])[0]
+            mark_absent_and_notify(emp, first[0], first[1], first[2], first[3], shift_end_time)
             continue
 
         # 2. Otherwise, try Half Day records
@@ -73,21 +100,36 @@ def execute():
                 "docstatus": 1,
                 "status": "Half Day"
             },
-            fields=["name", "attendance_date", "working_hours", "status"],
+            fields=["name", "attendance_date", "out_time", "status"],
             order_by="attendance_date asc"
         )
-        below_half = []
+        
+        found_stayback_half = False
+        early_exit_half = []
         for att in half_att:
-            wh = 0
-            try:
-                wh = float(att.get("working_hours") or 0)
-            except Exception:
-                pass
-            print(f"{att['attendance_date']}[Half Day]: {wh}")
-            below_half.append([str(att["attendance_date"]), att["name"], wh, att['status']])
-        if below_half:
-            first = sorted(below_half, key=lambda t: t[0])[0]
-            mark_absent_and_notify(emp, first[0], first[1], first[2], first[3])
+            out_time = att.get("out_time")
+            out_time_only = None
+            if out_time:
+                if isinstance(out_time, str):
+                    out_time_only = frappe.utils.get_time(out_time)
+                else:
+                    out_time_only = out_time.time()
+            
+            print(f"{att['attendance_date']}[Half Day]: out_time={out_time_only}")
+            
+            if out_time_only and out_time_only > shift_end_time:
+                found_stayback_half = True
+                print(f"  -> Stay back detected! {out_time_only} > {shift_end_time}")
+            else:
+                early_exit_half.append([str(att["attendance_date"]), att["name"], out_time_only, att['status']])
+        
+        if found_stayback_half:
+            print("Attendance OK: at least one 'Half Day' with checkout after shift end time.")
+            continue
+        
+        if early_exit_half:
+            first = sorted(early_exit_half, key=lambda t: t[0])[0]
+            mark_absent_and_notify(emp, first[0], first[1], first[2], first[3], shift_end_time)
         else:
             print("Attendance OK: No Present/Working/Half Day in week or all are sufficient.")
 
@@ -95,7 +137,7 @@ def execute():
     print("END OF STAYBACK ABSENT CHECK")
     print("=" * 70)
 
-def mark_absent_and_notify(emp, absent_day, att_name, worked, old_status):
+def mark_absent_and_notify(emp, absent_day, att_name, out_time, old_status, shift_end_time):
     try:
         if att_name:
             att = frappe.get_doc("Attendance", att_name)
@@ -115,13 +157,13 @@ def mark_absent_and_notify(emp, absent_day, att_name, worked, old_status):
         att.save()
         att.submit()
         comment_text = (
-            f"Marked Absent on {absent_day} as this was not an attended stay back day (no day >= 8h 15m, original status: {old_status}). "
-            f"Actual worked: {worked:.2f} hours."
+            f"Marked Absent on {absent_day} as this was not an attended stay back day (no day with checkout after {shift_end_time}, original status: {old_status}). "
+            f"Checkout time: {out_time}."
         )
         att.add_comment("Comment", comment_text)
         frappe.get_doc("Employee", emp.name).add_comment("Comment", comment_text)
         print("Attendance marked Absent and comment added for", emp.employee_name)
-        send_stayback_absent_mail(emp, absent_day, worked)
+        send_stayback_absent_mail(emp, absent_day, out_time, shift_end_time)
     except Exception as e:
         frappe.log_error(
             title=f"Stayback Absent Marking Error: {emp.name} ({absent_day})",
@@ -129,7 +171,7 @@ def mark_absent_and_notify(emp, absent_day, att_name, worked, old_status):
         )
         print(f"ERROR marking absence for {emp.name} - {str(e)}")
 
-def send_stayback_absent_mail(emp, absent_day, worked):
+def send_stayback_absent_mail(emp, absent_day, out_time, shift_end_time):
     try:
         sender_email = frappe.db.get_single_value("HR Settings", "sender_email")
         if not sender_email:
@@ -138,8 +180,10 @@ def send_stayback_absent_mail(emp, absent_day, worked):
         emp_first = emp.employee_name.split(" ")[0].capitalize() if emp.employee_name else "there"
         attendance_date_str = str(absent_day)
         subject = f"Stay Back Day Policy Violation - {attendance_date_str}"
-        worked_h = int(worked)
-        worked_m = int(round((worked - worked_h) * 60))
+        
+        out_time_str = str(out_time) if out_time else "N/A"
+        shift_end_str = str(shift_end_time)
+        
         message = f"""
 <body style="font-family: Arial, sans-serif; margin: 0; padding: 0">
   <div class="container" style="max-width: 600px; background-color: white; margin: 0 auto; border-radius: 10px;">
@@ -154,14 +198,15 @@ def send_stayback_absent_mail(emp, absent_day, worked):
           Dear {emp_first},
         </h2>
         <p style="color: #3d475c; font-size: 14px; font-weight: 400;">
-            As per the Stay Back policy, it is required to complete a minimum of 8 hours of work on at least one day during the week.
+            As per the Stay Back policy, it is required to have at least one checkout time after the shift end time ({shift_end_str}) during the week.
         </p>
         <ul style="color: #3d475c; font-size: 14px; font-weight: 400; padding-left: 20px;">
-          <li><strong>Date marked as Absent</strong> {attendance_date_str}</li>
-          <li><strong>Recorded working hours on that day:</strong> {worked_h}h {worked_m}m</li>
+          <li><strong>Date marked as Absent:</strong> {attendance_date_str}</li>
+          <li><strong>Recorded checkout time on that day:</strong> {out_time_str}</li>
+          <li><strong>Required checkout time:</strong> After {shift_end_str}</li>
         </ul>
         <p style='color:#b3261e;font-size:14px;font-weight:500;'>
-          Since there was no day during the week where the required stay-back duration (≥ 8 hours) was completed, the above-mentioned date has been marked as Absent (LOP) in your attendance records.
+          Since there was no day during the week where you checked out after the shift end time, the above-mentioned date has been marked as Absent (LOP) in your attendance records.
         </p>
         <p style="color: #3d475c; font-size: 14px; font-weight: 400;">
           If you believe this marking is incorrect or need any clarification, please feel free to reach out to the HR team.
