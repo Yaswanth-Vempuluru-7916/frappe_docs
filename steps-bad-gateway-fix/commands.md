@@ -1,3 +1,4 @@
+```bash
 root@Ubuntu-2404-noble-amd64-base ~ # history
     1  reboot
     2  clear
@@ -97,3 +98,4 @@ root@Ubuntu-2404-noble-amd64-base ~ # history
    96  docker info | grep "Docker Root Dir"
    97  ls /var/lib/docker/volumes
    98  history
+```
