@@ -54,7 +54,7 @@ cat > apps.json << 'EOF'
   }
 ]
 EOF
-
+CHANGE THE PYTHON AND NODE VERSION TO 3.14 AND 24.1.0 IN EASY-INSTALL.PY AND FRAPPE DOCKER IMAGES CUSTOM CONTAINERFILE
 # Build & push
 python3 easy-install.py build \
   --apps-json apps.json \
