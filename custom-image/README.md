@@ -18,7 +18,57 @@ This project runs a **production-ready ERPNext** using **custom versions** of:
 
 All code is pulled from **my GitHub forks**, built into a **custom Docker image**, and deployed using `frappe_docker`.
 
+
 ---
+
+## ✅ Correct Fix (PRODUCTION-SAFE)
+
+You need to **enable Docker BuildKit / buildx**.
+
+### 🔧 Step 1: Install buildx (Ubuntu 22.04)
+
+```bash
+apt update
+apt install -y docker-buildx
+```
+
+Verify:
+
+```bash
+docker buildx version
+```
+
+---
+
+### 🔧 Step 2: Enable BuildKit (important)
+
+Run:
+
+```bash
+export DOCKER_BUILDKIT=1
+export COMPOSE_DOCKER_CLI_BUILD=1
+```
+
+(Optional but recommended – make it permanent)
+
+```bash
+echo 'export DOCKER_BUILDKIT=1' >> ~/.bashrc
+echo 'export COMPOSE_DOCKER_CLI_BUILD=1' >> ~/.bashrc
+source ~/.bashrc
+```
+
+---
+
+### 🔧 Step 3: Create & use a buildx builder (one time)
+
+```bash
+docker buildx create --name frappe-builder --use
+docker buildx inspect --bootstrap
+```
+
+---
+
+
 
 ## Step-by-Step Setup (3 Steps + Critical Fix)
 
@@ -68,6 +118,8 @@ Docker Hub Image: [`yaswanth1679/erpnext:custom-dev`](https://hub.docker.com/rep
 
 ---
 
+
+
 ### Step 3: Deploy to Production (with `.env` Fix)
 
 ```bash
@@ -78,6 +130,16 @@ python3 easy-install.py deploy \
   --image yaswanth1679/erpnext:custom-dev \
   --app erpnext \
   --app hrms
+```
+
+---
+
+## 🚀 After success, you should see
+
+```
+Successfully built <image-id>
+Successfully tagged yaswanth1679/frappe-hrms:1.0.0
+Pushed yaswanth1679/frappe-hrms:1.0.0
 ```
 
 ---
