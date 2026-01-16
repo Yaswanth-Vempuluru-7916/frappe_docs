@@ -1,0 +1,173 @@
+ssh -i ~/yaswanth-prod-hetzner-key.pem root@144.76.61.219                                                                     ─╯
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-157-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Fri Jan 16 06:51:13 AM CET 2026
+
+  System load:             0.36
+  Usage of /:              1.7% of 905.22GB
+  Memory usage:            3%
+  Swap usage:              0%
+  Processes:               313
+  Users logged in:         1
+  IPv4 address for enp9s0: 144.76.61.219
+  IPv6 address for enp9s0: 2a01:4f8:191:7084::2
+
+ * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
+   just raised the bar for easy, resilient and secure K8s cluster deployment.
+
+   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
+
+Expanded Security Maintenance for Applications is not enabled.
+
+1 update can be applied immediately.
+To see these additional updates run: apt list --upgradable
+
+1 additional security update can be applied with ESM Apps.
+Learn more about enabling ESM Apps service at https://ubuntu.com/esm
+
+New release '24.04.3 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+*** System restart required ***
+Last login: Fri Jan 16 06:08:55 2026 from 183.82.105.187
+root@Ubuntu-2204-jammy-amd64-base ~ # docker ps -aq | xargs -r docker rm -f
+9a562201169c
+root@Ubuntu-2204-jammy-amd64-base ~ # docker volume ls
+DRIVER    VOLUME NAME
+local     buildx_buildkit_frappe-builder0_state
+root@Ubuntu-2204-jammy-amd64-base ~ # docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+root@Ubuntu-2204-jammy-amd64-base ~ # docker images -q | xargs -r docker rmi -f
+Untagged: mariadb:11.8
+Untagged: mariadb@sha256:345fa26d595e8c7fe298e0c4098ed400356f502458769c8902229b3437d6da2b
+Deleted: sha256:bfe9184ea9e5b839e6b01d279a2e508a3bb50e66c843dfd2183dd7608550ce78
+Deleted: sha256:87125e92587546b876af1f3ba314ac250532b30a284f33028c673cf70e029532
+Deleted: sha256:8f64ce1a27028a13301555b2c8a155d97dd7194242d619ed627a850c7128e1ac
+Deleted: sha256:3b96a14c227a5387b346b9a1275bdaa55310e7ba45e13b7703034532bfc27c7d
+Deleted: sha256:52efb35fc1f3d9a66d87bf363cc79a2896910a6a4b5ecafeb0860e5001fecaea
+Deleted: sha256:bb970065ab22b6659779b54f14389a09a2b3152829909f6bc50d0a1665ed9c6b
+Deleted: sha256:7cc1dfcc9250e1c0972ac307e02b58941f779038a92fc193a06c3746dccad783
+Deleted: sha256:d98fa41d32843dee4e1e466498cc911163d61a3b0da4919604d853efcc1092ca
+Deleted: sha256:123a078714d5ea9382d4d9f550753aefce8b34ec5ae11ae8273038d3bcbb943f
+Untagged: traefik:v2.11
+Untagged: traefik@sha256:49772822d0f255b5596bce44546f760a21e3b2b7e82aa4528361fa7fd5dee7cb
+Deleted: sha256:ed20dfb085f1a0b3a6732d14f91cf286681d2b42d389150ca29ec4347b71b1d3
+Deleted: sha256:45e0d97c03ce6b4187a225e7477e80efc104852131db15ca64eae5f0bc0e7e01
+Deleted: sha256:209f26dbc5f1ec580a0e048cb112baaf626ea9480ecd81b5aa1ddfe9bff93a44
+Deleted: sha256:37ce223e38110e124970e5834e13e0fba4b7b8b02c1f6d97933fda41876f6f69
+Untagged: yaswanth1679/frappe-hrms:custom-dev
+Untagged: yaswanth1679/frappe-hrms@sha256:a111f94578c9c869832fd4336543038c9f4571904ca14fce76a1356489dde513
+Deleted: sha256:919feae353baedd873452019fca7265ab415c19c8690f19a56196d05dd07319d
+Untagged: mcuadros/ofelia:latest
+Untagged: mcuadros/ofelia@sha256:83dfc7e24b63aa8973010ad146bee3f69bec272eb20ea2c8e10c7170dcfd50a9
+Deleted: sha256:61870fed8d9dc08e711abd2589faaae5f43292829615aa3e84bbeacacb208da0
+Deleted: sha256:814a5fdcbe6dd41cd44a584cbaf2ba93c2f4efb1de98a374e863c79b5d148971
+Deleted: sha256:5b2b4647dfabadd7122cee35b751c1436c56d8dc3c626fe1d50cff9747c03522
+Deleted: sha256:7bb20cf5ef67526cb843d264145241ce4dde09a337b5be1be42ba464de9a672d
+Untagged: moby/buildkit:buildx-stable-1
+Untagged: moby/buildkit@sha256:de10faf919fc71ba4eb1dd7bd6449566d012b0c9436b1c61bfee21d621b009aa
+Deleted: sha256:fe0990fb85c4586aaa94e599905b75a2676664f065f29bea67ebcd5b2fe88acb
+Deleted: sha256:6b35fb8a20fabcd75edb73ef7e64287ac2340b946fdca250bd85cf9c9d895805
+Deleted: sha256:28ebba3f243ca70ea1bfea1888fcc525f3e5b31f61f3b99b658408177e9a7552
+Deleted: sha256:8a9fd6f1cfd21858d5ddefad03aa9398357d31dedc4b2dc1b99df69c7c0bdba3
+Deleted: sha256:55f26261952873ad233f32c6ab93ad7fdb95a868f819a24888e5714bbc05f0de
+Deleted: sha256:256f393e029fa2063d8c93720da36a74a032bed3355a2bc3e313ad12f8bde9d1
+Untagged: redis:6.2-alpine
+Untagged: redis@sha256:37e002448575b32a599109664107e374c8709546905c372a34d64919043b9ceb
+Deleted: sha256:fccc1d5d834127ad720eef205179e2d1da4f54ad11318e6a3216e43570900082
+Deleted: sha256:48ef6da811900f98742f64c8811c8572603aad8cacd9cdba2a6867f314bda70e
+Deleted: sha256:1e30ebb6eb17e59bb438f8cce7fac6be15b35396b5d723994c5162d1b8c6b969
+Deleted: sha256:fbb29b08dac1fbc2dbafd48974f68f6d82ca57c026b716c9a5fedad209e6c262
+Deleted: sha256:b5d94023e36bc3523376e33d6723df382ad1a7ac4aa88bd85626d67af103f9d2
+Deleted: sha256:b7f28e05a4f8c66864a633e4764b89e3d8eb9e122e2d83751f15f84aaea4a9b2
+Deleted: sha256:c2f46ce3b908cc5f04554a976d0246a26575ba850b04337e1f3d8cd3dc8610d9
+Deleted: sha256:7a57e1cb27aeadf42b57b2f56e75a88a4e143bda4aed683e1040aa32597e380b
+Deleted: sha256:922ec217407c0fd31cb18b46090bf62e439fb53ecd01f09406d62e25a906e09b
+root@Ubuntu-2204-jammy-amd64-base ~ # docker system prune -a --volumes
+WARNING! This will remove:
+  - all stopped containers
+  - all networks not used by at least one container
+  - all anonymous volumes not used by at least one container
+  - all images without at least one container associated to them
+  - all build cache
+
+Are you sure you want to continue? [y/N] y
+
+Deleted build cache objects:
+2cs2vy7mt3hqdix5067fcnkzw
+jrhextcjvzbgeesw85taxc16k
+35pswc7tngp3sntc8kbe8o0um
+hl2pf8s8d4pm2h2tdwyhpi28e
+z7f36k194njrr7mmjb7jz58oy
+ldrt924zst4xtjy1s1vypvmdb
+yokdewb8wvvb8p01r1bje6a6c
+yaix4vorykfedfczmho5co8c8
+cfag37fh4iqzzgkhte1873lvy
+ndkxtfa0f3vwis9pncw495zjy
+o1l6jcpu7jowtjbp7zd48g0ws
+q2x9dcsycq3jbvnqhk3jhbjqn
+d3r0r9am1ayzy0nq7boo3guxc
+3l59ogp9f8amn43hw0a0cy6ax
+pl3s2tcc17j636xufln0vvifk
+nsx5a8b75aam2q2llc04p7zg6
+5gijfmmw01ttpifzvwkwmye2c
+mdl0fa8u601tdise98850nfuv
+anr7jd7e2g802jx6xjfdkhtwb
+ogeqnlxy6o2a73hfztbmm7yrc
+m4eyhe9js4p6ab6w5wi8bqtx9
+5bqmz1l84s9ap6wpo4vesp53f
+reeyiezccgv8k665j4rxsdwml
+cbc8ood5x8wo7roobpjvb7ne5
+am0cyiypdirn2vhokev456zz5
+xmfwmb52vsclls89iwgta2wgg
+fwzayhsog5hshnxick74r5qsp
+ob15qn3t15587jjkg6g10g942
+za9b0hgpo72px9krh7crga5zp
+f9hx1a2v6ej8waa7yaf6irp96
+l33l1qhsi1nqvsdwgexugolak
+6l8xehsmhgtsqkdelkslzb2d9
+zhbhd1xew784hwmauppe607nm
+hlzs6verg0r4u54sv6pya3oze
+kuhcekiax8dtqqagcn63xq86m
+1l4jvgb47qyfb43flk8kw94xd
+
+Total reclaimed space: 9.245GB
+root@Ubuntu-2204-jammy-amd64-base ~ #
+root@Ubuntu-2204-jammy-amd64-base ~ # docker volume ls
+DRIVER    VOLUME NAME
+local     buildx_buildkit_frappe-builder0_state
+root@Ubuntu-2204-jammy-amd64-base ~ # docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+root@Ubuntu-2204-jammy-amd64-base ~ # docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+156c7892e531   bridge    bridge    local
+55a4ceb1c8bf   host      host      local
+970b73d74e15   none      null      local
+root@Ubuntu-2204-jammy-amd64-base ~ # docker volume ls
+DRIVER    VOLUME NAME
+local     buildx_buildkit_frappe-builder0_state
+root@Ubuntu-2204-jammy-amd64-base ~ # docker volume rm buildx_buildkit_frappe-builder0_state
+buildx_buildkit_frappe-builder0_state
+root@Ubuntu-2204-jammy-amd64-base ~ # docker buildx ls
+NAME/NODE             DRIVER/ENDPOINT                   STATUS     BUILDKIT   PLATFORMS
+frappe-builder*       docker-container
+ \_ frappe-builder0    \_ unix:///var/run/docker.sock   inactive
+default               docker
+ \_ default            \_ default                       running    v0.22.0    linux/amd64 (+3), linux/386
+root@Ubuntu-2204-jammy-amd64-base ~ # docker buildx rm frappe-builder
+frappe-builder removed
+root@Ubuntu-2204-jammy-amd64-base ~ # docker buildx ls
+docker volume ls
+NAME/NODE     DRIVER/ENDPOINT   STATUS    BUILDKIT   PLATFORMS
+default*      docker
+ \_ default    \_ default       running   v0.22.0    linux/amd64 (+3), linux/386
+DRIVER    VOLUME NAME
+root@Ubuntu-2204-jammy-amd64-base ~ # docker system prune -f
+Total reclaimed space: 0B
+root@Ubuntu-2204-jammy-amd64-base ~ # docker volume ls
+DRIVER    VOLUME NAME
