@@ -1,0 +1,14 @@
+ERPNEXT_VERSION=v15.94.1
+DB_PASSWORD=0b9b5531d
+DB_HOST=db
+DB_PORT=3306
+REDIS_CACHE=redis-cache:6379
+REDIS_QUEUE=redis-queue:6379
+REDIS_SOCKETIO=redis-socketio:6379
+LETSENCRYPT_EMAIL=yaswanthvempuluru@gmail.com
+SITE_ADMIN_PASS=42dfa2edcb94
+SITES=`uat-pwv2.hashiraworks`
+PULL_POLICY=missing
+BACKUP_CRONSTRING="@every 6h"
+CUSTOM_IMAGE=yaswanth1679/frappe-hrms
+CUSTOM_TAG=custom-dev
