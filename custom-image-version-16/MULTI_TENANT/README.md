@@ -51,7 +51,7 @@ nano easy-install.py
 
 ### 🔧 Custom defaults baked into this file
 
-* Frappe repo → your fork `https://github.com/Yaswanth-Vempuluru-7916/frappe`
+* Frappe repo → `https://github.com/Yaswanth-Vempuluru-7916/frappe`
 * Frappe branch → `version-16`
 * Python → `3.14`
 * Node → `24.1.0`
@@ -67,9 +67,9 @@ This is **intentional** and **not redundant**.
 1. Clones the `frappe_docker` repository
 2. Builds & pushes a Docker image using:
 
-   ```
-   frappe_docker/images/custom/Containerfile
-   ```
+```
+frappe_docker/images/custom/Containerfile
+```
 
 ### ❗ The key constraint
 
@@ -204,40 +204,34 @@ yaswanth1679/frappe-hrms:version-16:v15.94.3
 
 ---
 
-## ⚙️ Fix Environment Configuration
+## ⚙️ Fix Environment Configuration (Using `sed`)
 
-Edit the env file:
+Edit is **scripted and reproducible** — no manual mistakes.
+
+### ❌ Remove ERPNext version
 
 ```bash
-nano frappe-hrms.env
+sed -i '/^ERPNEXT_VERSION=/d' frappe-hrms.env
 ```
 
-### ✅ Final correct content
+### 🔁 Fix image reference
+
+```bash
+sed -i 's|CUSTOM_IMAGE=yaswanth1679/frappe-hrms:version-16|CUSTOM_IMAGE=yaswanth1679/frappe-hrms|' frappe-hrms.env
+echo "CUSTOM_TAG=version-16" >> frappe-hrms.env
+```
+
+### 🔍 Verify
+
+```bash
+cat frappe-hrms.env
+```
+
+Expected critical lines:
 
 ```env
-DB_PASSWORD=0a7c42c42
-DB_HOST=db
-DB_PORT=3306
-
-REDIS_CACHE=redis-cache:6379
-REDIS_QUEUE=redis-queue:6379
-REDIS_SOCKETIO=redis-socketio:6379
-
-LETSENCRYPT_EMAIL=yaswanthvempuluru@gmail.com
-SITE_ADMIN_PASS=1fc1d5887bbe
-
-SITES=`uat-pwv2.hashiraworks.com`
-PULL_POLICY=missing
-BACKUP_CRONSTRING="@every 6h"
-
 CUSTOM_IMAGE=yaswanth1679/frappe-hrms
 CUSTOM_TAG=version-16
-```
-
-❌ Remove:
-
-```env
-ERPNEXT_VERSION=...
 ```
 
 ---
@@ -326,10 +320,27 @@ Expected:
 
 ---
 
-## ➕ Create Second Site
+## ➕ Create Second Site (Important Prompts Explained)
 
 ```bash
 bench new-site uat-gvsv2.hashiraworks.com
+```
+
+When prompted:
+
+* **Enter mysql super user [root]:**
+  👉 Just press **Enter**
+
+* **MySQL root password:**
+  👉 Enter the value of `DB_PASSWORD` from `frappe-hrms.env`
+
+* **Site Administrator password:**
+  👉 Enter **any temporary password**
+  (You will later use the **same admin password as the first site**, and can change it from UI)
+
+Then install apps:
+
+```bash
 bench --site uat-gvsv2.hashiraworks.com install-app erpnext
 bench --site uat-gvsv2.hashiraworks.com install-app hrms
 ```
@@ -382,5 +393,4 @@ bench --site uat-gvsv2.hashiraworks.com doctor
 * ✅ Multiple isolated sites
 * ✅ Separate databases per site
 * ✅ Scheduler running
-
 
