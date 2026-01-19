@@ -104,6 +104,13 @@ CUSTOM_IMAGE=yaswanth1679/erpnext
 CUSTOM_TAG=custom-dev
 ```
 
+After that , **edit `~/frappe_docker/images/custom/Containerfile`**:
+
+```bash
+ARG PYTHON_VERSION=3.14
+ARG NODE_VERSION=24.1.0
+```
+
 > **Why?**  
 > `CUSTOM_IMAGE:custom-dev` → invalid Docker reference  
 > `CUSTOM_IMAGE=repo` + `CUSTOM_TAG=tag` → correct
