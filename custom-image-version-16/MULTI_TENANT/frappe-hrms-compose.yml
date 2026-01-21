@@ -1,4 +1,5 @@
 name: frappe-hrms
+
 services:
   backend:
     depends_on:
@@ -12,14 +13,21 @@ services:
     pull_policy: missing
     restart: unless-stopped
     volumes:
-      - type: volume
-        source: sites
-        target: /home/frappe/frappe-bench/sites
-        volume: {}
+      - sites:/home/frappe/frappe-bench/sites
+      - apps:/home/frappe/frappe-bench/apps
+
   configurator:
-    command:
-      - |
-        ls -1 apps > sites/apps.txt; bench set-config -g db_host $$DB_HOST; bench set-config -gp db_port $$DB_PORT; bench set-config -g redis_cache "redis://$$REDIS_CACHE"; bench set-config -g redis_queue "redis://$$REDIS_QUEUE"; bench set-config -g redis_socketio "redis://$$REDIS_QUEUE"; bench set-config -gp socketio_port $$SOCKETIO_PORT;
+    entrypoint:
+      - bash
+      - -c
+    command: >
+      ls -1 apps > sites/apps.txt;
+      bench set-config -g db_host $$DB_HOST;
+      bench set-config -gp db_port $$DB_PORT;
+      bench set-config -g redis_cache "redis://$$REDIS_CACHE";
+      bench set-config -g redis_queue "redis://$$REDIS_QUEUE";
+      bench set-config -g redis_socketio "redis://$$REDIS_QUEUE";
+      bench set-config -gp socketio_port $$SOCKETIO_PORT;
     depends_on:
       db:
         condition: service_healthy
@@ -30,9 +38,6 @@ services:
       redis-queue:
         condition: service_started
         required: true
-    entrypoint:
-      - bash
-      - -c
     environment:
       DB_HOST: db
       DB_PORT: "3306"
@@ -46,10 +51,9 @@ services:
     pull_policy: missing
     restart: on-failure
     volumes:
-      - type: volume
-        source: sites
-        target: /home/frappe/frappe-bench/sites
-        volume: {}
+      - sites:/home/frappe/frappe-bench/sites
+      - apps:/home/frappe/frappe-bench/apps
+
   cron:
     command:
       - daemon
@@ -62,11 +66,8 @@ services:
     networks:
       default: null
     volumes:
-      - type: bind
-        source: /var/run/docker.sock
-        target: /var/run/docker.sock
-        read_only: true
-        bind: {}
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
   db:
     command:
       - --character-set-server=utf8mb4
@@ -75,7 +76,7 @@ services:
       - --skip-innodb-read-only-compressed
     environment:
       MARIADB_AUTO_UPGRADE: "1"
-      MYSQL_ROOT_PASSWORD: 64fdf1717
+      MYSQL_ROOT_PASSWORD: ff4356b2d
     healthcheck:
       test:
         - CMD
@@ -91,10 +92,8 @@ services:
       default: null
     restart: unless-stopped
     volumes:
-      - type: volume
-        source: db-data
-        target: /var/lib/mysql
-        volume: {}
+      - db-data:/var/lib/mysql
+
   frontend:
     command:
       - nginx-entrypoint.sh
@@ -127,14 +126,14 @@ services:
     pull_policy: missing
     restart: unless-stopped
     volumes:
-      - type: volume
-        source: sites
-        target: /home/frappe/frappe-bench/sites
-        volume: {}
+      - sites:/home/frappe/frappe-bench/sites
+      - apps:/home/frappe/frappe-bench/apps
+
   proxy:
     command:
       - --providers.docker=true
       - --providers.docker.exposedbydefault=false
+      - --core.defaultRuleSyntax=v2
       - --entrypoints.web.address=:80
       - --entrypoints.web.http.redirections.entrypoint.to=websecure
       - --entrypoints.web.http.redirections.entrypoint.scheme=https
@@ -143,29 +142,17 @@ services:
       - --certificatesResolvers.main-resolver.acme.httpChallenge.entrypoint=web
       - --certificatesResolvers.main-resolver.acme.email=yaswanthvempuluru@gmail.com
       - --certificatesResolvers.main-resolver.acme.storage=/letsencrypt/acme.json
-    image: traefik:v2.11
+    image: traefik:v3.6
     networks:
       default: null
     ports:
-      - mode: ingress
-        target: 80
-        published: "80"
-        protocol: tcp
-      - mode: ingress
-        target: 443
-        published: "443"
-        protocol: tcp
+      - "80:80"
+      - "443:443"
     restart: unless-stopped
     volumes:
-      - type: volume
-        source: cert-data
-        target: /letsencrypt
-        volume: {}
-      - type: bind
-        source: /var/run/docker.sock
-        target: /var/run/docker.sock
-        read_only: true
-        bind: {}
+      - cert-data:/letsencrypt
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
   queue-long:
     command:
       - bench
@@ -183,10 +170,9 @@ services:
     pull_policy: missing
     restart: unless-stopped
     volumes:
-      - type: volume
-        source: sites
-        target: /home/frappe/frappe-bench/sites
-        volume: {}
+      - sites:/home/frappe/frappe-bench/sites
+      - apps:/home/frappe/frappe-bench/apps
+
   queue-short:
     command:
       - bench
@@ -204,25 +190,23 @@ services:
     pull_policy: missing
     restart: unless-stopped
     volumes:
-      - type: volume
-        source: sites
-        target: /home/frappe/frappe-bench/sites
-        volume: {}
+      - sites:/home/frappe/frappe-bench/sites
+      - apps:/home/frappe/frappe-bench/apps
+
   redis-cache:
     image: redis:6.2-alpine
     networks:
       default: null
     restart: unless-stopped
+
   redis-queue:
     image: redis:6.2-alpine
     networks:
       default: null
     restart: unless-stopped
     volumes:
-      - type: volume
-        source: redis-queue-data
-        target: /data
-        volume: {}
+      - redis-queue-data:/data
+
   scheduler:
     command:
       - bench
@@ -235,7 +219,7 @@ services:
     labels:
       ofelia.enabled: "true"
       ofelia.job-exec.datecron.command: bench --site all backup
-      ofelia.job-exec.datecron.schedule: '@every 6h'
+      ofelia.job-exec.datecron.schedule: "@every 6h"
       ofelia.job-exec.datecron.user: frappe
     networks:
       default: null
@@ -243,10 +227,9 @@ services:
     pull_policy: missing
     restart: unless-stopped
     volumes:
-      - type: volume
-        source: sites
-        target: /home/frappe/frappe-bench/sites
-        volume: {}
+      - sites:/home/frappe/frappe-bench/sites
+      - apps:/home/frappe/frappe-bench/apps
+
   websocket:
     command:
       - node
@@ -262,36 +245,21 @@ services:
     pull_policy: missing
     restart: unless-stopped
     volumes:
-      - type: volume
-        source: sites
-        target: /home/frappe/frappe-bench/sites
-        volume: {}
+      - sites:/home/frappe/frappe-bench/sites
+      - apps:/home/frappe/frappe-bench/apps
+
 networks:
   default:
     name: frappe-hrms_default
+
 volumes:
-  cert-data:
-    name: frappe-hrms_cert-data
+  sites:
+    name: frappe-hrms_sites
+  apps:
+    name: frappe-hrms_apps
   db-data:
     name: frappe-hrms_db-data
   redis-queue-data:
     name: frappe-hrms_redis-queue-data
-  sites:
-    name: frappe-hrms_sites
-x-backend-defaults:
-  depends_on:
-    configurator:
-      condition: service_completed_successfully
-  image: yaswanth1679/frappe-hrms:version-16
-  pull_policy: missing
-  restart: unless-stopped
-  volumes:
-    - sites:/home/frappe/frappe-bench/sites
-x-customizable-image:
-  image: yaswanth1679/frappe-hrms:version-16
-  pull_policy: missing
-  restart: unless-stopped
-x-depends-on-configurator:
-  depends_on:
-    configurator:
-      condition: service_completed_successfully
+  cert-data:
+    name: frappe-hrms_cert-data
