@@ -196,7 +196,6 @@ sudo nano /etc/hosts
 
 127.0.0.1  hrms-pw.local
 
-Access your site at: **http://hrms-pw.local:8000**
-
 ```
+Access your site at: **http://hrms-pw.local:8000**
 
