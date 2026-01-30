@@ -12,7 +12,19 @@ pyenv install 3.14
 # Install Python 3.12.8 (used for Frappe)
 pyenv install 3.12.8
 pyenv local 3.12.8
+```
 
+```bash
+nano ~/.zshrc
+```
+
+```bash
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+```
+
+```bash
 # Verify installation
 python --version          # Should show: Python 3.12.8
 which python              # Should point to ~/.pyenv/versions/3.12.8/bin/python
@@ -99,6 +111,17 @@ sudo nano /opt/homebrew/etc/my.cnf
 
 # Frappe-specific MariaDB config
 sudo nano /opt/homebrew/etc/my.cnf.d/frappe.cnf
+
+[mysqld]
+character-set-client-handshake = FALSE
+character-set-server = utf8mb4
+collation-server = utf8mb4_unicode_ci
+
+[mysql]
+default-character-set = utf8mb4
+
+[client]
+default-character-set = utf8mb4
 ```
 
 > These files are used to set:
