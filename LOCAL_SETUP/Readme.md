@@ -238,7 +238,3 @@ http://hrms-pw.local:8000
 
 Your local **Frappe v16 + ERPNext + HRMS** environment is now ready.
 
-
-
-Just say the word.
-```
