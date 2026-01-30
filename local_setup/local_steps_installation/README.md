@@ -1,6 +1,9 @@
+
 # **Frappe + ERPNext + HRMS Setup Documentation (MacOS)**
 
-### **1. Install Python Using pyenv**
+---
+
+## **1. Install Python Using pyenv**
 
 ```bash
 # Install Python 3.14 first
@@ -18,7 +21,7 @@ pip --version             # Should match Python 3.12.8
 
 ---
 
-### **2. Install and Start Dependencies**
+## **2. Install and Start Dependencies**
 
 ```bash
 # Start MariaDB and Redis
@@ -31,7 +34,7 @@ mariadb-secure-installation
 
 ---
 
-### **3. Configure MariaDB for Frappe**
+## **3. Configure MariaDB for Frappe**
 
 ```bash
 # Login as root
@@ -78,7 +81,49 @@ mariadb -u frappe -p
 
 ---
 
-### **4. Initialize Bench Environment**
+## **4. MariaDB Configuration Files (Required for Frappe Stability)**
+
+```bash
+# Login to MariaDB as root (verification)
+sudo mariadb
+
+# Login as frappe user (verification)
+mariadb -u frappe -p
+```
+
+Edit MariaDB configuration files:
+
+```bash
+# Main MariaDB config
+sudo nano /opt/homebrew/etc/my.cnf
+
+# Frappe-specific MariaDB config
+sudo nano /opt/homebrew/etc/my.cnf.d/frappe.cnf
+```
+
+> These files are used to set:
+
+* character-set-server
+* collation-server
+* innodb settings
+* max_connections
+* sql-mode compatibility for Frappe
+
+Restart MariaDB after config changes:
+
+```bash
+brew services restart mariadb
+```
+
+Test connection again:
+
+```bash
+mariadb -u frappe -p
+```
+
+---
+
+## **5. Initialize Bench Environment**
 
 ```bash
 # Create a Python virtual environment
@@ -94,7 +139,7 @@ bench --version
 
 ---
 
-### **5. Initialize Frappe Bench**
+## **6. Initialize Frappe Bench**
 
 ```bash
 # Initialize bench with your forked Frappe repository
@@ -106,7 +151,7 @@ bench init frappe-bench \
 
 ---
 
-### **6. Go to Bench Directory**
+## **7. Go to Bench Directory**
 
 ```bash
 cd frappe-bench
@@ -114,7 +159,7 @@ cd frappe-bench
 
 ---
 
-### **7. Alter MariaDB Frappe User (Before get-app)**
+## **8. Alter MariaDB Frappe User (Before get-app)**
 
 ```bash
 sudo mariadb
@@ -132,7 +177,7 @@ EXIT;
 
 ---
 
-### **8. Get ERPNext and HRMS Apps**
+## **9. Get ERPNext and HRMS Apps**
 
 ```bash
 bench get-app https://github.com/Yaswanth-Vempuluru-7916/erpnext.git --branch version-16
@@ -141,7 +186,7 @@ bench get-app https://github.com/Yaswanth-Vempuluru-7916/hrms.git --branch versi
 
 ---
 
-### **9. Create a New Site**
+## **10. Create a New Site**
 
 ```bash
 bench new-site hrms-pw.local --db-root-username frappe --db-root-password yaswanth
@@ -149,7 +194,7 @@ bench new-site hrms-pw.local --db-root-username frappe --db-root-password yaswan
 
 ---
 
-### **10. Install Apps on the Site**
+## **11. Install Apps on the Site**
 
 ```bash
 # ERPNext first
@@ -161,7 +206,7 @@ bench --site hrms-pw.local install-app hrms
 
 ---
 
-### **11. Setup Redis and Start Bench**
+## **12. Setup Redis and Start Bench**
 
 ```bash
 # If Redis was stopped
@@ -176,9 +221,7 @@ bench start
 
 ---
 
-
-
-> ⚠️ Important: If `bench` is not recognized in a new terminal:
+> ⚠️ **Important: bench not found in a new terminal**
 
 ```bash
 cd ~/Developer/frappe-local
@@ -188,14 +231,19 @@ cd frappe-bench
 
 ---
 
-### **12. Add to hosts file**
+## **13. Add Site Entry to Hosts File**
 
 ```bash
-
 sudo nano /etc/hosts
-
-127.0.0.1  hrms-pw.local
-
 ```
-Access your site at: **http://hrms-pw.local:8000**
 
+Add:
+
+```text
+127.0.0.1  hrms-pw.local
+```
+
+Access your site at:
+👉 **[http://hrms-pw.local:8000](http://hrms-pw.local:8000)**
+
+---
