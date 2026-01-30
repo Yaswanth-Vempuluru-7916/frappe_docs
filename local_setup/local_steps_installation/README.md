@@ -188,3 +188,13 @@ cd frappe-bench
 
 ---
 
+### **12. Add to hosts file**
+
+```bash
+
+sudo nano /etc/hosts
+
+127.0.0.1  hrms-pw.local
+
+```
+
