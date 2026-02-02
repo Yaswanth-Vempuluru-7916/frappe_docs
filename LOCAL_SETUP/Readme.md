@@ -232,6 +232,22 @@ Access in browser:
 http://hrms-pw.local:8000
 ```
 
+## 14. Stop Bench and Restart
+
+```bash
+pkill -f redis-server
+pkill -f frappe
+pkill -f node
+
+```
+
+Go to frappe-bench/
+
+```bash
+bench start
+```
+
+
 ---
 
 ## ✅ Setup Complete
