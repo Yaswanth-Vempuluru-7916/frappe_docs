@@ -2,7 +2,12 @@
 
 # ========== CONSTANTS ==========
 LEAVE_TYPE = "Annual Leaves"
-LEAVE_POLICY_NAME = "HR-LPOL-2025-00006-1"
+
+# 🔹 ARRAY OF LEAVE POLICIES (processed one by one)
+LEAVE_POLICY_NAMES = [
+    "HR-LPOL-2025-00006-1",
+    # "HR-LPOL-2025-00007-1",
+]
 
 # ========== EXCLUDED EMPLOYEES ==========
 EXCLUDED_EMPLOYEES = []
@@ -42,119 +47,126 @@ try:
     print("Current Month:", current_month_start, "to", current_month_end)
     print("Leave Period:", leave_period_start, "to", leave_period_end)
     print("Leave Type:", LEAVE_TYPE)
-    print("Leave Policy:", LEAVE_POLICY_NAME)
     print("Monthly Quota:", MONTHLY_QUOTA)
     print("=" * 70)
-
-    policy_assignments = frappe.get_all(
-        "Leave Policy Assignment",
-        filters={
-            "leave_policy": LEAVE_POLICY_NAME,
-            "docstatus": 1
-        },
-        fields=["employee", "employee_name"]
-    )
-
-    eligible_employees = []
-    for a in policy_assignments:
-        if frappe.db.get_value("Employee", a.employee, "status") == "Active":
-            eligible_employees.append(a)
 
     total_success = 0
     total_excluded = 0
     total_skipped_other = 0
 
-    for assignment in eligible_employees:
-        emp_id = assignment.employee
-        emp_name = assignment.employee_name
+    # ============================================================
+    # 🔁 PROCESS EACH LEAVE POLICY ONE BY ONE (NO LOGIC CHANGE)
+    # ============================================================
+    for LEAVE_POLICY_NAME in LEAVE_POLICY_NAMES:
 
-        if emp_id in EXCLUDED_EMPLOYEES:
-            total_excluded += 1
-            continue
+        print("\n" + "#" * 70)
+        print("Processing Leave Policy:", LEAVE_POLICY_NAME)
+        print("#" * 70)
 
-        print("\n" + "-" * 70)
-        print(f"Employee: {emp_name} ({emp_id})")
-        print("-" * 70)
-
-        existing_allocation = frappe.get_all(
-            "Leave Allocation",
+        policy_assignments = frappe.get_all(
+            "Leave Policy Assignment",
             filters={
-                "employee": emp_id,
-                "leave_type": LEAVE_TYPE,
-                "from_date": [">=", leave_period_start],
-                "to_date": ["<=", leave_period_end],
+                "leave_policy": LEAVE_POLICY_NAME,
                 "docstatus": 1
             },
-            fields=["name", "from_date", "to_date", "total_leaves_allocated"],
-            limit=1
+            fields=["employee", "employee_name"]
         )
 
-        if existing_allocation:
-            allocation = existing_allocation[0]
+        eligible_employees = []
+        for a in policy_assignments:
+            if frappe.db.get_value("Employee", a.employee, "status") == "Active":
+                eligible_employees.append(a)
 
-            approved_applications = frappe.get_all(
-                "Leave Application",
+        for assignment in eligible_employees:
+            emp_id = assignment.employee
+            emp_name = assignment.employee_name
+
+            if emp_id in EXCLUDED_EMPLOYEES:
+                total_excluded += 1
+                continue
+
+            print("\n" + "-" * 70)
+            print(f"Employee: {emp_name} ({emp_id})")
+            print("-" * 70)
+
+            existing_allocation = frappe.get_all(
+                "Leave Allocation",
                 filters={
                     "employee": emp_id,
                     "leave_type": LEAVE_TYPE,
-                    "docstatus": 1,
-                    "status": "Approved",
-                    "from_date": [">=", allocation.from_date]
+                    "from_date": [">=", leave_period_start],
+                    "to_date": ["<=", leave_period_end],
+                    "docstatus": 1
                 },
-                fields=["total_leave_days"]
+                fields=["name", "from_date", "to_date", "total_leaves_allocated"],
+                limit=1
             )
 
-            leaves_taken = sum(app.total_leave_days for app in approved_applications)
-            current_balance = allocation.total_leaves_allocated - leaves_taken
-            addition = MONTHLY_QUOTA
+            if existing_allocation:
+                allocation = existing_allocation[0]
 
-            # ---------- CLEAN & CLEAR LOGGING ----------
-            old_total = allocation.total_leaves_allocated
+                approved_applications = frappe.get_all(
+                    "Leave Application",
+                    filters={
+                        "employee": emp_id,
+                        "leave_type": LEAVE_TYPE,
+                        "docstatus": 1,
+                        "status": "Approved",
+                        "from_date": [">=", allocation.from_date]
+                    },
+                    fields=["total_leave_days"]
+                )
 
-            print("Previous Total Allocated :", old_total)
-            print("Leaves Taken             :", leaves_taken)
-            print("Balance Before           :", current_balance)
-            print("Monthly Quota            :", MONTHLY_QUOTA)
-            print("Attempting to Add        :", addition)
+                leaves_taken = sum(app.total_leave_days for app in approved_applications)
+                current_balance = allocation.total_leaves_allocated - leaves_taken
+                addition = MONTHLY_QUOTA
 
-            if addition > 0:
-                alloc_doc = frappe.get_doc("Leave Allocation", allocation.name)
-                alloc_doc.new_leaves_allocated = alloc_doc.new_leaves_allocated + addition
-                alloc_doc.flags.ignore_validate = True
-                alloc_doc.flags.ignore_mandatory = True
-                alloc_doc.save(ignore_permissions=True)
+                old_total = allocation.total_leaves_allocated
+
+                print("Previous Total Allocated :", old_total)
+                print("Leaves Taken             :", leaves_taken)
+                print("Balance Before           :", current_balance)
+                print("Monthly Quota            :", MONTHLY_QUOTA)
+                print("Attempting to Add        :", addition)
+
+                if addition > 0:
+                    alloc_doc = frappe.get_doc("Leave Allocation", allocation.name)
+                    alloc_doc.new_leaves_allocated += addition
+                    alloc_doc.flags.ignore_validate = True
+                    alloc_doc.flags.ignore_mandatory = True
+                    alloc_doc.save(ignore_permissions=True)
+                    frappe.db.commit()
+
+                    alloc_doc.reload()
+                    new_total = alloc_doc.total_leaves_allocated
+                    new_balance = new_total - leaves_taken
+
+                    print("Final Total Allocated    :", new_total)
+                    print("Balance After            :", new_balance)
+
+                    if new_total > old_total:
+                        print("✓ LEAVES ACTUALLY ADDED  :", new_total - old_total)
+                        total_success += 1
+                    else:
+                        print("⚠ NO CHANGE             : ERPNext ignored allocation")
+                        total_skipped_other += 1
+            else:
+                doc = frappe.get_doc({
+                    "doctype": "Leave Allocation",
+                    "employee": emp_id,
+                    "leave_type": LEAVE_TYPE,
+                    "from_date": current_month_start,
+                    "to_date": leave_period_end,
+                    "new_leaves_allocated": MONTHLY_QUOTA,
+                    "total_leaves_allocated": MONTHLY_QUOTA
+                })
+
+                doc.insert(ignore_permissions=True, ignore_mandatory=True)
+                doc.submit()
                 frappe.db.commit()
 
-                alloc_doc.reload()
-                new_total = alloc_doc.total_leaves_allocated
-                new_balance = new_total - leaves_taken
-
-                print("Final Total Allocated    :", new_total)
-                print("Balance After            :", new_balance)
-
-                if new_total > old_total:
-                    print("✓ LEAVES ACTUALLY ADDED  :", new_total - old_total)
-                    total_success += 1
-                else:
-                    print("⚠ NO CHANGE             : ERPNext ignored allocation")
-                    total_skipped_other += 1
-        else:
-            doc = frappe.get_doc({
-                "doctype": "Leave Allocation",
-                "employee": emp_id,
-                "leave_type": LEAVE_TYPE,
-                "from_date": current_month_start,
-                "to_date": leave_period_end,
-                "new_leaves_allocated": MONTHLY_QUOTA,
-                "total_leaves_allocated": MONTHLY_QUOTA
-            })
-
-            doc.insert(ignore_permissions=True, ignore_mandatory=True)
-            doc.submit()
-            frappe.db.commit()
-
-            print("✓ NEW ALLOCATION CREATED :", MONTHLY_QUOTA)
-            total_success += 1
+                print("✓ NEW ALLOCATION CREATED :", MONTHLY_QUOTA)
+                total_success += 1
 
     print("\n" + "=" * 70)
     print("MONTHLY ON DUTY ALLOCATION COMPLETED")
