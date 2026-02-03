@@ -1443,6 +1443,184 @@ Or open in browser:
 
 ---
 
+
+## 🔧 Troubleshooting: Fix **502 Bad Gateway** (Traefik + Cloudflare)
+
+### Symptom
+
+After upgrade / rollback / image change, sites show:
+
+* **Browser**: `502 Bad Gateway`
+* **Cloudflare** error page
+* Containers are **UP**
+* `bench doctor` is **healthy**
+
+---
+
+### 🔍 How to Confirm It’s a Gateway Issue
+
+Run this from your local machine or server:
+
+#### ❌ When site is **BROKEN** (Bad Gateway)
+
+```bash
+curl -I https://uat-gvsv2.hashiraworks.com
+```
+
+**Output:**
+
+```
+HTTP/2 502
+date: Tue, 03 Feb 2026 08:22:43 GMT
+content-type: text/plain; charset=UTF-8
+content-length: 15
+cache-control: private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+expires: Thu, 01 Jan 1970 00:00:01 GMT
+referrer-policy: same-origin
+x-frame-options: SAMEORIGIN
+server: cloudflare
+cf-ray: 9c8085a4288e3b01-BOM
+alt-svc: h3=":443"; ma=86400
+```
+
+This confirms:
+
+* Cloudflare is reachable
+* Backend is **not reachable via Traefik**
+
+---
+
+#### ✅ When site is **WORKING**
+
+```bash
+curl -I https://uat-gvsv2.hashiraworks.com
+```
+
+**Output:**
+
+```
+HTTP/2 200
+date: Tue, 03 Feb 2026 08:41:35 GMT
+content-type: text/html; charset=utf-8
+cache-control: no-store,no-cache,must-revalidate,max-age=0
+nel: {"report_to":"cf-nel","success_fraction":0.0,"max_age":604800}
+link: </assets/frappe/dist/css/website.bundle.HDNOTQQX.css>; rel=preload; as=style,</assets/erpnext/dist/css/erpnext-web.bundle.ZILWTXE5.css>; rel=preload; as=style,</assets/frappe/dist/css/login.bundle.XQ2HK3OH.css>; rel=preload; as=style,</assets/frappe/dist/js/frappe-web.bundle.A4QFLFM5.js>; rel=preload; as=script,</website_script.js>; rel=preload; as=script,</assets/frappe/icons/lucide/icons.svg?v=1770093154.3296762>; rel=preload; as=fetch; crossorigin,</assets/frappe/icons/timeless/icons.svg?v=1770093154.3296762>; rel=preload; as=fetch; crossorigin,</assets/frappe/icons/espresso/icons.svg?v=1770093154.3296762>; rel=preload; as=fetch; crossorigin,</assets/erpnext/icons/pos-icons.svg?v=1770093154.3296762>; rel=preload; as=fetch; crossorigin
+referrer-policy: same-origin, strict-origin-when-cross-origin
+server: cloudflare
+set-cookie: sid=Guest; Expires=Tue, 10 Feb 2026 10:41:34 GMT; Max-Age=612000; HttpOnly; Path=/; SameSite=Lax
+set-cookie: system_user=no; Path=/; SameSite=Lax
+set-cookie: full_name=Guest; Path=/; SameSite=Lax
+set-cookie: user_id=Guest; Path=/; SameSite=Lax
+set-cookie: user_lang=en; Path=/; SameSite=Lax
+strict-transport-security: max-age=63072000; includeSubDomains; preload
+vary: Accept-Encoding
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+x-from-cache: False
+x-page-name: login
+x-xss-protection: 1; mode=block
+cf-cache-status: DYNAMIC
+report-to: {"group":"cf-nel","max_age":604800,"endpoints":[{"url":"https://a.nel.cloudflare.com/report/v4?s=UdlP9vcuOsFwF81AePscsdJ08OCSUgkF1BAoqjA0kCgBbLr59QwimX5uxKQDlya9iFw%2BmGfLJesbbmwy0Aim8XB15mRClcEAhKP4%2Bt6eOlniyIuO%2B0LKZ%2FCv"}]}
+cf-ray: 9c80a13ff91ab13b-BOM
+alt-svc: h3=":443"; ma=86400
+```
+
+This confirms:
+
+* Traefik routing is correct
+* Frontend is reachable
+* Site is healthy
+
+---
+
+## 🧠 Root Cause (Very Important)
+
+When using **Traefik v2 / v3** with **Docker Compose** and **multi-tenant Frappe**:
+
+* Traefik **does not automatically know** which Docker network to use
+* Even if containers are on the same network
+* Result: **Traefik sees the router but cannot reach the service**
+* This causes **502 Bad Gateway**
+
+---
+
+## ✅ FIX: Explicitly Set Docker Network for Traefik
+
+### Step 1: Edit compose file
+
+```bash
+nano frappe-hrms-erpnext-compose.yml
+```
+
+---
+
+### Step 2: Update `frontend` service → `labels`
+
+Ensure **ALL** of the following labels exist:
+
+```yaml
+labels:
+  traefik.enable: "true"
+  traefik.docker.network: frappe-hrms-erpnext_default
+  traefik.http.routers.frontend-http.entrypoints: websecure
+  traefik.http.routers.frontend-http.rule: HostRegexp(`{host:.+}`)
+  traefik.http.routers.frontend-http.tls.certresolver: main-resolver
+  traefik.http.services.frontend.loadbalancer.server.port: "8080"
+```
+
+🔑 **Critical line (do not skip):**
+
+```yaml
+traefik.docker.network: frappe-hrms-erpnext_default
+```
+
+---
+
+### Step 3: Restart Containers
+
+```bash
+docker compose -f frappe-hrms-erpnext-compose.yml down
+docker compose -f frappe-hrms-erpnext-compose.yml up -d
+```
+
+Optional but recommended:
+
+```bash
+sleep 30
+docker compose -f frappe-hrms-erpnext-compose.yml restart proxy frontend
+```
+
+---
+
+### Step 4: Verify Fix
+
+```bash
+curl -I https://uat-pwv2.hashiraworks.com
+curl -I https://uat-gvsv2.hashiraworks.com
+```
+
+**Expected:**
+
+```
+HTTP/2 200
+```
+
+---
+
+## 📝 Important Notes
+
+* This issue is **NOT related to**
+
+  * `bench migrate`
+  * Code changes
+  * Image rollback
+* Backend, DB, Redis can all be healthy and still show **502**
+* This is a **Traefik + Docker networking requirement**
+* Always add `traefik.docker.network` for **production multi-tenant setups**
+
+---
+
+
 ## 🎯 Complete Upgrade Script (All Steps Combined)
 
 ```bash
