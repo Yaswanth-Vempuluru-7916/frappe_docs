@@ -1036,6 +1036,41 @@ if __name__ == "__main__":
 
 ---
 
+## 🛡️ Pre-Upgrade Safety Step: Mark Current Image as Stable (Rollback Ready)
+
+> **Purpose**: Always keep a known-good image before building or deploying a new one
+> This allows **instant rollback** if the new image has a critical bug.
+
+---
+
+### ✅ Step A: Tag the Currently Running Image as `stable`
+
+Before building a **new image**, tag the **currently running image** as stable.
+
+```bash
+# Mark current version as stable
+docker tag \
+  yaswanth1679/frappe-hrms-erpnext:version-16 \
+  yaswanth1679/frappe-hrms-erpnext:16.0.0-stable
+```
+
+---
+
+### ✅ Step B: Push Stable Image to Docker Hub
+
+```bash
+# Push stable image to Docker Hub
+docker push yaswanth1679/frappe-hrms-erpnext:16.0.0-stable
+```
+
+✔ This guarantees:
+
+* A **known working image** is always available
+* Rollback does **not** depend on rebuilding
+* Production recovery is fast and safe
+
+---
+
 ## 🎯 Upgrade Overview
 
 The upgrade process involves:
@@ -1151,6 +1186,34 @@ def throw_overlap_error(self, d):
 ```
 
 Replace the function name with something you actually modified to confirm your changes are present.
+
+---
+
+##  Update Image Tag in Compose File
+
+Before starting containers (or when rolling back), **ensure the compose file points to the stable image**.
+
+### ✅ Update image tag in compose file
+
+```bash
+sed -i \
+  's|yaswanth1679/frappe-hrms-erpnext:OLD_TAG|yaswanth1679/frappe-hrms-erpnext:NEW_TAG|g' \
+  frappe-hrms-erpnext-compose.yml
+```
+
+---
+
+### ✅ Verify Change
+
+```bash
+grep yaswanth1679/frappe-hrms-erpnext frappe-hrms-erpnext-compose.yml
+```
+
+**Expected output:**
+
+```
+yaswanth1679/frappe-hrms-erpnext:NEW_TAG
+```
 
 ---
 
