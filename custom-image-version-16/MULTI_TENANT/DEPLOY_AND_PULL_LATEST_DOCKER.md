@@ -524,9 +524,3 @@ After upgrade, verify:
 - Prevents stale code from running
 
 ---
-
----
-
-**Document Version:** 1.0  
-**Last Updated:** 2026-02-03  
-**Tested On:** Frappe v16, ERPNext v16, HRMS v16
