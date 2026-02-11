@@ -225,3 +225,156 @@ uat (testing)
         ↓
 prod (live)
 ```
+
+
+# 📘 Developing a New Feature & Syncing with Official Updates
+
+This explains how to:
+
+* Develop a new feature
+* Merge it safely into UAT
+* Later sync official Frappe updates
+* Without breaking `prod`
+
+---
+
+# 🧑‍💻 1️⃣ Creating a New Feature
+
+⚠️ Never develop directly on `uat`.
+
+Always create a feature branch from `uat`.
+
+```bash
+git checkout uat
+git pull origin uat
+git checkout -b feature/attendance-auto-deduction
+```
+
+Work on your feature.
+
+Commit changes:
+
+```bash
+git add .
+git commit -m "feat: attendance auto deduction logic"
+```
+
+Push:
+
+```bash
+git push origin feature/attendance-auto-deduction
+```
+
+Create Pull Request:
+
+```
+feature/attendance-auto-deduction → uat
+```
+
+After review → merge into `uat`.
+
+---
+
+# 🧠 Flow Now Looks Like
+
+```
+version-16-upstream
+        ↓
+uat  ← your feature merged here
+        ↓
+prod (unchanged)
+```
+
+---
+
+# 🔄 2️⃣ Later: Official Frappe Releases Updates
+
+When
+Frappe
+releases updates to `version-16`:
+
+---
+
+## Step A — Sync Official Code
+
+```bash
+git fetch upstream
+git checkout version-16-upstream
+git merge upstream/version-16
+git push origin version-16-upstream
+```
+
+At this point:
+
+* uat is untouched
+* prod is untouched
+
+---
+
+## Step B — Bring Official Updates Into UAT
+
+Now merge official updates into uat:
+
+```bash
+git checkout uat
+git merge version-16-upstream
+```
+
+Now UAT contains:
+
+* Your features
+* Latest official Frappe updates
+
+Fix conflicts if any.
+Test everything.
+
+---
+
+## Step C — Promote to Production (When Stable)
+
+```bash
+git checkout prod
+git merge uat
+```
+
+Deploy.
+
+---
+
+# 🔥 Extremely Important Rules
+
+### ❌ Never
+
+* Develop on `version-16-upstream`
+* Merge upstream directly into `prod`
+* Develop directly on `prod`
+
+---
+
+### ✅ Always Follow
+
+```
+feature → uat → prod
+```
+
+And for official updates:
+
+```
+upstream → version-16-upstream → uat → prod
+```
+
+---
+
+# 🎯 Final Visual Model
+
+```
+Official Frappe
+        ↓
+version-16-upstream
+        ↓
+uat (features + official updates tested)
+        ↓
+prod (stable only)
+```
+
+---
