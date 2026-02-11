@@ -5,7 +5,7 @@ services:
       configurator:
         condition: service_completed_successfully
         required: true
-    image: yaswanth1679/frappe-hrms:version-16
+    image: yaswanth1679/frappe-hrms:version-16:v15.94.3
     networks:
       default: null
     platform: linux/amd64
@@ -39,7 +39,7 @@ services:
       REDIS_CACHE: redis-cache:6379
       REDIS_QUEUE: redis-queue:6379
       SOCKETIO_PORT: "9000"
-    image: yaswanth1679/frappe-hrms:version-16
+    image: yaswanth1679/frappe-hrms:version-16:v15.94.3
     networks:
       default: null
     platform: linux/amd64
@@ -75,7 +75,7 @@ services:
       - --skip-innodb-read-only-compressed
     environment:
       MARIADB_AUTO_UPGRADE: "1"
-      MYSQL_ROOT_PASSWORD: 64fdf1717
+      MYSQL_ROOT_PASSWORD: 0a7c42c42
     healthcheck:
       test:
         - CMD
@@ -114,11 +114,11 @@ services:
       UPSTREAM_REAL_IP_ADDRESS: 127.0.0.1
       UPSTREAM_REAL_IP_HEADER: X-Forwarded-For
       UPSTREAM_REAL_IP_RECURSIVE: "off"
-    image: yaswanth1679/frappe-hrms:version-16
+    image: yaswanth1679/frappe-hrms:version-16:v15.94.3
     labels:
       traefik.enable: "true"
       traefik.http.routers.frontend-http.entrypoints: websecure
-      traefik.http.routers.frontend-http.rule: HostRegexp(`{host:.+}`)
+      traefik.http.routers.frontend-http.rule: Host(`uat-pwv2.hashiraworks.com`)
       traefik.http.routers.frontend-http.tls.certresolver: main-resolver
       traefik.http.services.frontend.loadbalancer.server.port: "8080"
     networks:
@@ -176,7 +176,7 @@ services:
       configurator:
         condition: service_completed_successfully
         required: true
-    image: yaswanth1679/frappe-hrms:version-16
+    image: yaswanth1679/frappe-hrms:version-16:v15.94.3
     networks:
       default: null
     platform: linux/amd64
@@ -197,7 +197,7 @@ services:
       configurator:
         condition: service_completed_successfully
         required: true
-    image: yaswanth1679/frappe-hrms:version-16
+    image: yaswanth1679/frappe-hrms:version-16:v15.94.3
     networks:
       default: null
     platform: linux/amd64
@@ -231,7 +231,7 @@ services:
       configurator:
         condition: service_completed_successfully
         required: true
-    image: yaswanth1679/frappe-hrms:version-16
+    image: yaswanth1679/frappe-hrms:version-16:v15.94.3
     labels:
       ofelia.enabled: "true"
       ofelia.job-exec.datecron.command: bench --site all backup
@@ -255,7 +255,7 @@ services:
       configurator:
         condition: service_completed_successfully
         required: true
-    image: yaswanth1679/frappe-hrms:version-16
+    image: yaswanth1679/frappe-hrms:version-16:v15.94.3
     networks:
       default: null
     platform: linux/amd64
@@ -282,13 +282,13 @@ x-backend-defaults:
   depends_on:
     configurator:
       condition: service_completed_successfully
-  image: yaswanth1679/frappe-hrms:version-16
+  image: yaswanth1679/frappe-hrms:version-16:v15.94.3
   pull_policy: missing
   restart: unless-stopped
   volumes:
     - sites:/home/frappe/frappe-bench/sites
 x-customizable-image:
-  image: yaswanth1679/frappe-hrms:version-16
+  image: yaswanth1679/frappe-hrms:version-16:v15.94.3
   pull_policy: missing
   restart: unless-stopped
 x-depends-on-configurator:
