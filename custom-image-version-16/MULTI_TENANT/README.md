@@ -234,6 +234,12 @@ CUSTOM_IMAGE=yaswanth1679/frappe-hrms
 CUSTOM_TAG=version-16
 ```
 
+New update : 
+
+```bash
+export SITES_RULE='Host(`pw-uatv2.lykkeworks.com`)'
+```
+
 ---
 
 ## ✅ Deploy #2 — Real Deployment
