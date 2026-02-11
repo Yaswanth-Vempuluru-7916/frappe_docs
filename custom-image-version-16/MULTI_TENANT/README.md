@@ -35,6 +35,8 @@ rm -rf \
   frappe-hrms-passwords.txt
 ```
 
+
+
 ---
 
 ## 📥 1. Download Custom `easy-install.py`
@@ -399,4 +401,182 @@ bench --site uat-gvsv2.hashiraworks.com doctor
 * ✅ Multiple isolated sites
 * ✅ Separate databases per site
 * ✅ Scheduler running
+
+
+Perfect 👌 since this was a **real production-style multi-tenant issue**, this README will be written properly so future-you (or your team) doesn’t panic again.
+
+---
+
+# 📘 README – Fixing Multi-Tenant Internal Server Error (MariaDB + Migration)
+
+## 🧠 Problem Summary
+
+After:
+
+* Adding new host rules
+* Restarting containers
+* Modifying MariaDB users
+* Rebuilding image
+
+Some sites showed:
+
+```
+Internal Server Error
+frappe.exceptions.DoesNotExistError: Module Core not found
+frappe.exceptions.DoesNotExistError: Module Website not found
+MySQLdb.OperationalError: (1045, Access denied...)
+```
+
+### Root Causes
+
+1. MariaDB user privileges mismatch
+2. Site DB schema out of sync with code (migration not run)
+
+---
+
+# 🔐 Step 1 – Verify MariaDB Users
+
+Login to MariaDB container:
+
+```bash
+docker exec -it frappe-stack-db-1 mariadb -u root -p
+```
+
+Check users:
+
+```sql
+SELECT user, host FROM mysql.user
+WHERE user IN (
+'_a18f2f6a8387d9c4',
+'_605b182ff073ab13',
+'_41e9a04a61b10b20'
+);
+```
+
+---
+
+# 🔓 Step 2 – Grant Proper Permissions
+
+For each site DB:
+
+```sql
+GRANT ALL PRIVILEGES ON `_a18f2f6a8387d9c4`.* 
+TO '_a18f2f6a8387d9c4'@'%' 
+IDENTIFIED BY 'R0FdClhKdBixYDNE';
+
+GRANT ALL PRIVILEGES ON `_605b182ff073ab13`.* 
+TO '_605b182ff073ab13'@'%' 
+IDENTIFIED BY 'RoJy9tgTvJJiiGnx';
+
+GRANT ALL PRIVILEGES ON `_41e9a04a61b10b20`.* 
+TO '_41e9a04a61b10b20'@'%' 
+IDENTIFIED BY 'kR1IjF8DWcFo04Iv';
+
+FLUSH PRIVILEGES;
+```
+
+⚠️ Passwords must match `site_config.json`
+
+Check site config:
+
+```bash
+cat sites/<sitename>/site_config.json
+```
+
+---
+
+# 🔄 Step 3 – Run Migration (CRITICAL)
+
+Enter backend container:
+
+```bash
+docker exec -it frappe-stack-backend-1 bash
+```
+
+For each affected site:
+
+```bash
+bench --site gvs-uatv2.lykkeworks.com migrate
+bench --site gvs-uatv2.lykkeworks.com clear-cache
+bench --site gvs-uatv2.lykkeworks.com clear-website-cache
+```
+
+```bash
+bench --site pw-uatv2.lykkeworks.com migrate
+bench --site pw-uatv2.lykkeworks.com clear-cache
+bench --site pw-uatv2.lykkeworks.com clear-website-cache
+```
+
+---
+
+# 🔁 Step 4 – Restart Backend
+
+```bash
+docker restart frappe-stack-backend-1
+```
+
+---
+
+# 🧠 Why This Fix Works
+
+When:
+
+* Docker image changes
+* Frappe version changes
+* Container restarts after code rebuild
+
+The database may not match the code.
+
+`bench migrate`:
+
+* Syncs DocTypes
+* Rebuilds module metadata
+* Applies patches
+* Fixes missing "Core" and "Website" modules
+
+---
+
+# 🚨 Production Rule (Extremely Important)
+
+After:
+
+* New image build
+* Version upgrade
+* Branch switch
+* Code pull
+
+
+Never skip migration in multi-tenant setups.
+
+---
+
+# 🏗 Safe Multi-Tenant Checklist
+
+Before restarting production:
+
+* ✅ DB users match site_config.json
+* ✅ GRANT privileges correct
+* ✅ bench migrate executed
+* ✅ backend restarted
+* ✅ traefik host rules correct
+
+---
+
+# 🏆 Final Result
+
+* 3 sites working
+* No volume deletion
+* No data loss
+* Proper DB privilege alignment
+* Proper schema sync
+
+---
+
+If you want, I can now create a:
+
+* 🔥 Production-grade Multi-Tenant Recovery Playbook
+* 🚀 UAT → PROD Promotion SOP
+* 🛡 Frappe Disaster Recovery Guide
+
+Just tell me which one you want.
 
