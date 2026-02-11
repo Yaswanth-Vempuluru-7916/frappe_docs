@@ -1,0 +1,100 @@
+    1  clear
+    2  wget https://raw.githubusercontent.com/frappe/bench/develop/easy-install.py
+    3  sudo apt update -y
+    4  sudo apt upgrade -y
+    5  sudo systemctl enable docker
+    6  sudo apt install docker.io -y
+    7  ls
+    8  sudo systemctl enable docker
+    9  sudo systemctl start docker
+   10  sudo usermod -aG docker $USER
+   11  mkdir -p ~/.docker/cli-plugins
+   12  curl -SL https://github.com/docker/compose/releases/latest/download/docker-compose-linux-x86_64 -o ~/.docker/cli-plugins/docker-compose
+   13  chmod +x ~/.docker/cli-plugins/docker-compose
+   14  docker --version
+   15  docker compose version
+   16  ls
+   17  exit
+   18  cat easy-install.py
+   19  vim easy-install.py
+   20  cat easy-install.py
+   21  vim easy-install.py
+   22  nano easy-install.py
+   23  cat easy-install.py
+   24  cat > apps.json << 'EOF'
+   25  [
+   26    {
+   27      "url": "https://github.com/Yaswanth-Vempuluru-7916/erpnext",
+   28      "branch": "develop",
+   29      "name": "erpnext"
+   30    },
+   31    {
+   32      "url": "https://github.com/Yaswanth-Vempuluru-7916/hrms",
+   33      "branch": "develop",
+   34      "name": "hrms"
+   35    }
+   36  ]
+   37  EOF
+   38  cat apps.json
+   39  docker login
+   40  python3 easy-install.py build   --apps-json apps.json   --containerfile images/custom/Containerfile   --tag yaswanth1679/frappe-hrms:1.0.0   --push
+   41  apt update
+   42  apt install -y docker-buildx
+   43  docker buildx version
+   44  echo 'export DOCKER_BUILDKIT=1' >> ~/.bashrc
+   45  echo 'export COMPOSE_DOCKER_CLI_BUILD=1' >> ~/.bashrc
+   46  source ~/.bashrc
+   47  docker buildx create --name frappe-builder --use
+   48  docker buildx inspect --bootstrap
+   49  python3 easy-install.py build   --apps-json apps.json   --containerfile images/custom/Containerfile   --tag yaswanth1679/frappe-hrms:1.0.0   --push
+   50  ls
+   51  rm -rf frappe_docker/ easy-install.log
+   52  ls
+   53  python3 easy-install.py build   --apps-json apps.json   --containerfile images/custom/Containerfile   --tag yaswanth1679/frappe-hrms:custom   --push
+   54  cat apps.json
+   55  nano easy-install.py
+   56  cat easy-install.py
+   57  cat apps.json
+   58  clear
+   59  cat easy-install.py
+   60  cd frappe_docker/
+   61  ls
+   62  cd images/
+   63  ls
+   64  cd ..
+   65  grep Container
+   66  grep Containerfile
+   67  cd overrides/
+   68  ls
+   69  cd ..
+   70  cd docs/
+   71  ls
+   72  cd ..
+   73  docker login
+   74  python3 easy-install.py build \
+   75    --apps-json apps.json \
+   76    --containerfile images/custom/Containerfile \
+   77    --tag yaswanth1679/frappe-hrms:custom-dev \
+   78    --push
+   79  python3 easy-install.py build   --apps-json ~/apps.json   --containerfile images/custom/Containerfile   --tag yaswanth1679/frappe-hrms:custom-dev   --push
+   80  docker login
+   81  python3 easy-install.py build \
+   82    --apps-json apps.json \
+   83    --containerfile images/custom/Containerfile \
+   84    --tag yaswanth1679/frappe-hrms:v15-dev \
+   85    --push
+   86  cd frappe_docker/images/custom
+   87  ls
+   88  cat Containerfile
+   89  cd ..
+   90  nano easy-install.py
+   91  nano frappe_docker/images/custom/Containerfile
+   92  python3 easy-install.py build   --apps-json apps.json   --containerfile images/custom/Containerfile   --tag yaswanth1679/frappe-hrms:custom-dev   --push
+   93  nano frappe_docker/images/custom/Containerfile
+   94  nano easy-install.py
+   95  python3 easy-install.py build   --apps-json apps.json   --containerfile images/custom/Containerfile   --tag yaswanth1679/frappe-hrms:custom-dev   --push
+   96  nano easy-install.py
+   97  nano frappe_docker/images/custom/Containerfile
+   98  python3 easy-install.py build   --apps-json apps.json   --containerfile images/custom/Containerfile   --tag yaswanth1679/frappe-hrms:custom-dev   --push
+   99  cat frappe_docker/images/custom/Containerfile
+  100  exit
