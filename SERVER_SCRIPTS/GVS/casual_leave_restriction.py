@@ -25,7 +25,6 @@ if frappe.session.user != "Administrator":
             if assignment:
                 return assignment[0]["holiday_list"]
 
-            # Fallback to Employee master holiday list
             fallback = frappe.db.get_value("Employee", employee, "holiday_list")
             if fallback:
                 validity = frappe.db.get_value(
@@ -37,10 +36,14 @@ if frappe.session.user != "Administrator":
                 if validity and validity.from_date <= date <= validity.to_date:
                     return fallback
 
-            return None
+            frappe.throw(_(
+                f"No Holiday List is assigned for "
+                f"{frappe.utils.formatdate(date, 'dd-MM-yyyy')}. "
+                f"Please assign a valid Holiday List to the employee before applying leave."
+            ))
 
         # ============================================================
-        # VALIDATION 1: February & May Restriction (UNCHANGED)
+        # VALIDATION 1: February & May Restriction
         # ============================================================
         employee_staff_category = frappe.db.get_value(
             "Employee", doc.employee, "custom_staff_category"
@@ -88,7 +91,7 @@ if frappe.session.user != "Administrator":
             temp_date = frappe.utils.add_days(temp_date, 1)
 
         # ============================================================
-        # STAYBACK CHECK (UNCHANGED)
+        # STAYBACK CHECK
         # ============================================================
         stayback_day = frappe.db.get_value(
             "Employee", doc.employee, "custom_stayback_day"
@@ -149,7 +152,8 @@ if frappe.session.user != "Administrator":
             if doc.half_day:
                 half_day_date = frappe.utils.getdate(doc.half_day_date) if doc.half_day_date else from_date
                 if half_day_date.month == month and half_day_date.year == year:
-                    current_month_days -= 0.5
+                    if current_month_days > 0:
+                        current_month_days -= 0.5
 
             # --------------------------------------------------------
             # Fetch existing leaves overlapping this month
@@ -197,18 +201,12 @@ if frappe.session.user != "Administrator":
                 if leave.half_day:
                     half_day_date = frappe.utils.getdate(leave.half_day_date) if leave.half_day_date else leave_from
                     if half_day_date.month == month and half_day_date.year == year:
-                        total_days_in_month -= 0.5
+                        if total_days_in_month > 0:
+                            total_days_in_month -= 0.5
 
             # --------------------------------------------------------
-            # FINAL VALIDATION (UNCHANGED LOGIC)
+            # FINAL VALIDATION
             # --------------------------------------------------------
-            if total_days_in_month == 0 and current_month_days > MAX_CASUAL_LEAVE_PER_MONTH:
-                frappe.throw(_(
-                    f"You cannot apply for {current_month_days} days of Casual Leave in "
-                    f"{frappe.utils.formatdate(first_day, 'MMMM yyyy')}. "
-                    f"Maximum allowed is {MAX_CASUAL_LEAVE_PER_MONTH} days per month."
-                ))
-
             if total_days_in_month >= MAX_CASUAL_LEAVE_PER_MONTH:
                 frappe.throw(_(
                     f"You have already used {total_days_in_month} day(s) of Casual Leave in "
