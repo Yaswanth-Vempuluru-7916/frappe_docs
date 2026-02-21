@@ -181,6 +181,7 @@ def start_prod(
         # Writing to compose file
         if not os.path.exists(env_file_path):
             admin_pass = generate_pass()
+
             db_pass = generate_pass(9)
             write_to_env(
                 frappe_docker_dir=frappe_docker_dir,
@@ -360,6 +361,7 @@ def setup_dev_instance(project: str):
         clone_frappe_docker_repo()
     install_container_runtime()
 
+
     try:
         command = [
             "docker",
@@ -473,7 +475,6 @@ def create_site(
     try:
         subprocess.run(
             command,
-
             check=True,
         )
         logging.info("New site creation completed")
@@ -522,10 +523,8 @@ def exec_command(project: str, command: List[str] = [], interactive_terminal=Fal
         )
         logging.info("New site creation completed")
     except Exception as e:
-
         logging.error(f"Exec command failed for {project}", exc_info=True)
         cprint(f"Exec command failed for {project}\n", e)
-
 
 
 def add_project_option(parser: argparse.ArgumentParser):
@@ -601,13 +600,13 @@ def add_build_parser(subparsers: argparse.ArgumentParser):
         "-r",
         "--frappe-path",
         help="Frappe Repository to use, default: https://github.com/frappe/frappe",
-        default="https://github.com/Yaswanth-Vempuluru-7916/frappe",
+        default="https://github.com/frappe/frappe",
     )
     parser.add_argument(
         "-b",
         "--frappe-branch",
         help="Frappe branch to use, default: version-15",
-        default="version-16",
+        default="version-15",
     )
     parser.add_argument(
         "-j",
@@ -631,14 +630,14 @@ def add_build_parser(subparsers: argparse.ArgumentParser):
     parser.add_argument(
         "-y",
         "--python-version",
-        help="Python Version, default: 3.14",
-        default="3.14",
+        help="Python Version, default: 3.11.6",
+        default="3.11.6",
     )
     parser.add_argument(
         "-d",
         "--node-version",
-        help="NodeJS Version, default: 24.1.0",
-        default="24.1.0",
+        help="NodeJS Version, default: 18.18.2",
+        default="18.18.2",
     )
     parser.add_argument(
         "-x",
@@ -771,7 +770,6 @@ if __name__ == "__main__":
     if len(sys.argv) == 1:
         parser.print_help(sys.stderr)
         sys.exit(1)
-
 
     args = parser.parse_args()
 
